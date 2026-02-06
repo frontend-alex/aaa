@@ -1,3 +1,5 @@
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+packages:
+  - "app/client"
+  - "app/server"
+  - "packages/shared"
+  - "site"

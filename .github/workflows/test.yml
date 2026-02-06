@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  verify:
+    name: Build, Test & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # Version read from package.json "packageManager" field
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Step 1: Lint (fast fail on style issues)
+      - name: Lint
+        run: pnpm lint
+
+      # Step 2: Build (dependency graph order via Turbo)
+      - name: Build
+        run: pnpm build
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+      # Step 3: Test (against built artifacts)
+      - name: Test
+        run: pnpm test:only
+
+      # Step 4: Coverage (optional, only on main)
+      - name: Test with Coverage
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: pnpm test:coverage
+        continue-on-error: true
+
+      # Upload coverage artifacts
+      - name: Upload coverage reports
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+        continue-on-error: true
