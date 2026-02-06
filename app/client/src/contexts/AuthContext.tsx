@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       onSuccess: (data) => {
         toast.success(data.message);
         queryClient.setQueryData(["auth", "me"], null);
-        navigate(ROUTES.PUBLIC.LANDING, { replace: true });
+        navigate(ROUTES.PUBLIC.LOGIN, { replace: true });
       },
     }
   );
