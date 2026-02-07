@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
 const customButtonVariants = cva(
-    "flex flex-row items-center justify-between gap-3 p-5 uppercase text-sm tracking-tighter box-border cursor-pointer group",
+    "flex flex-row items-center justify-between gap-3 p-5 uppercase text-sm font-semibold tracking-tighter box-border cursor-pointer group",
     {
         variants: {
             variant: {
@@ -26,7 +26,7 @@ const customButtonVariants = cva(
 )
 
 const circleVariants = cva(
-    "size-1.5 rounded-full bg-transparent border transition-[transform,colors] duration-200 group-hover:scale-60",
+    "size-1.5 rounded-full bg-transparent border transition-all group-hover:scale-60",
     {
         variants: {
             variant: {
