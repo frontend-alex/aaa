@@ -1,0 +1,10 @@
+.primary-button {
+    @apply flex flex-row items-center justify-between gap-3 p-5 uppercase text-sm tracking-tighter box-border
+}
+
+.circle {
+    @apply 
+       size-1.5 rounded-full bg-transparent border border-background 
+       transition-transform transition-colors duration-200
+       group-hover:scale-60 group-hover:bg-background;
+}
