@@ -42,7 +42,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
-    "shared": "file:packages\\shared",
+    "shared": "file:packages/shared",
     "supertest": "^7.1.4",
     "turbo": "^2.5.4",
     "vitest": "^3.2.4"
