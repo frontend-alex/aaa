@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /* Dev indicator can be hidden via CSS in globals.css */
 };
 
 export default nextConfig;

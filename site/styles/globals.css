@@ -120,7 +120,28 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Hide scrollbar when scroll is disabled */
+body.scroll-disabled {
+  overflow: hidden;
+}
+
+body.scroll-disabled::-webkit-scrollbar {
+  display: none;
+}
+
+body.scroll-disabled {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+[data-nextjs-dialog-overlay],
+[data-nextjs-toast],
+nextjs-portal {
+  display: none !important;
 }

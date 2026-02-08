@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
 const customButtonVariants = cva(
-    "flex flex-row items-center justify-between gap-3 p-5 uppercase text-sm font-semibold tracking-tighter box-border cursor-pointer group",
+    "flex flex-row items-center justify-between gap-3 p-5 py-6 uppercase text-sm font-semibold tracking-tighter box-border cursor-pointer group",
     {
         variants: {
             variant: {
                 default: "hover:bg-black hover:dark:bg-white",
                 outline: "hover:bg-none",
                 secondary: "hover:bg-none",
-                ghost: "hover:bg-none",
+                ghost: "hover:bg-transparent",
                 destructive: "hover:bg-none",
                 link: "",
             },
@@ -45,14 +45,15 @@ const circleVariants = cva(
 )
 
 // Circle component that adapts to button variant
-function Circle({ variant = "default" }: { variant?: VariantProps<typeof buttonVariants>["variant"] }) {
+function Circle({ variant = "default", className }: { variant?: VariantProps<typeof buttonVariants>["variant"], className?: string }) {
     return (
-        <span className={circleVariants({ variant })} />
+        <span className={cn(circleVariants({ variant }), className)} />
     )
 }
 
 type ButtonProps = React.ComponentProps<typeof ShadcnButton> & VariantProps<typeof buttonVariants> & {
     circle?: boolean
+    circleClassName?: string
 }
 
 // Custom Button wrapper that wraps shadcn Button
@@ -60,12 +61,13 @@ function Button({
     className,
     variant = "default",
     children,
+    circleClassName,
     circle,
     ...props
 }: ButtonProps) {
     const isDefault = variant === "default"
     const showCircle = circle !== undefined ? circle : isDefault
-    
+
     return (
         <ShadcnButton
             variant={variant}
@@ -76,7 +78,7 @@ function Button({
             {...props}
         >
             <SlidingText>{children}</SlidingText>
-            {showCircle && <Circle variant={variant} />}
+            {showCircle && <Circle className={circleClassName} variant={variant} />}
         </ShadcnButton>
     )
 }
