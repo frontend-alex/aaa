@@ -14,9 +14,10 @@ interface ScrollRevealImageProps {
     width: number;
     height: number;
     className?: string;
+    imageClassName?: string;
 }
 
-function ScrollImage({ src, alt, width, height, className }: ScrollRevealImageProps) {
+function ScrollImage({ src, alt, width, height, className, imageClassName }: ScrollRevealImageProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 
@@ -43,6 +44,21 @@ function ScrollImage({ src, alt, width, height, className }: ScrollRevealImagePr
             },
         });
 
+        // Subtle parallax — image drifts vertically within the overflow-hidden container
+        gsap.fromTo(imageRef.current,
+            { yPercent: -10 },
+            {
+                yPercent: 10,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                },
+            }
+        );
+
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => {
                 if (trigger.vars.trigger === containerRef.current) {
@@ -63,7 +79,7 @@ function ScrollImage({ src, alt, width, height, className }: ScrollRevealImagePr
                 alt={alt}
                 width={width}
                 height={height}
-                className="w-full h-auto block"
+                className={`w-full h-full block ${imageClassName || ''}`}
                 style={{
                     transformOrigin: "center center",
                     willChange: "transform, filter"

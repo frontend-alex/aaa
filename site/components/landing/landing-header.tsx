@@ -14,11 +14,7 @@ const BACKGROUND_IMAGES = [
     "/images/bg2.png",
 ];
 
-interface LandingHeaderProps {
-    onPreloaderComplete?: () => void;
-}
-
-function LandingHeader({ onPreloaderComplete }: LandingHeaderProps) {
+function LandingHeader() {
     const headerRef = useRef<HTMLElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
     const bgDefaultRef = useRef<HTMLDivElement>(null);
@@ -85,12 +81,6 @@ function LandingHeader({ onPreloaderComplete }: LandingHeaderProps) {
         };
     }, []);
 
-    useEffect(() => {
-        if (onPreloaderComplete) {
-            onPreloaderComplete();
-        }
-    }, [onPreloaderComplete]);
-
     return (
         <>
             {/* Navbar wrapper - Moved outside header for Safari stacking context fix */}
@@ -105,7 +95,7 @@ function LandingHeader({ onPreloaderComplete }: LandingHeaderProps) {
                 {/* Default background image */}
                 <div
                     ref={bgDefaultRef}
-                    className="absolute inset-0 bg-cover bg-center lg:bg-fixed"
+                    className="absolute inset-0 bg-cover bg-center bg-fixed"
                     style={{
                         backgroundImage: `url('${BACKGROUND_IMAGES[0]}')`,
                         transformOrigin: "center center",
@@ -117,7 +107,7 @@ function LandingHeader({ onPreloaderComplete }: LandingHeaderProps) {
                 {/* Hover background image (hidden by default via clip-path) */}
                 <div
                     ref={bgHoverRef}
-                    className="absolute inset-0 bg-cover bg-center lg:bg-fixed"
+                    className="absolute inset-0 bg-cover bg-center bg-fixed"
                     style={{
                         backgroundImage: `url('${BACKGROUND_IMAGES[1]}')`,
                         clipPath: "inset(0% 0% 100% 0%)",
