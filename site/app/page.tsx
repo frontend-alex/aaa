@@ -1,7 +1,7 @@
 "use client";
 
 import { gsap } from "gsap";
-import { isProd } from "@/config/env";
+import { isDev, isProd } from "@/config/env";
 import { Copy } from "@/custom/copy";
 import { Preloader } from "@/components/Preloader";
 import { ScrollImage } from "@/custom/scroll-image";
@@ -34,7 +34,7 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (isProd) {
+    if (!isProd) {
       animateRevealTexts();
     }
   }, [animateRevealTexts]);
