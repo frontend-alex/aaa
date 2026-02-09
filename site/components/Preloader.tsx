@@ -3,22 +3,37 @@
 import { gsap } from "gsap";
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { setScrollEnabled } from "@/lib/lenis";
 
 interface PreloaderProps {
     onComplete?: () => void;
 }
 
 function Preloader({ onComplete }: PreloaderProps) {
+
     const containerRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const textRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // 1. Initial lock attempt
+        setScrollEnabled(false);
+
+        // 2. Delayed lock attempt to catch Lenis if it initializes later
+        const timer = setTimeout(() => {
+            setScrollEnabled(false);
+        }, 100);
+
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
+                onStart: () => {
+                    // 3. Safety lock on animation start
+                    setScrollEnabled(false);
+                },
                 onComplete: () => {
                     if (containerRef.current) containerRef.current.style.display = "none";
+                    setScrollEnabled(true);
                 },
             });
 
@@ -91,7 +106,10 @@ function Preloader({ onComplete }: PreloaderProps) {
 
         });
 
-        return () => ctx.revert();
+        return () => {
+            clearTimeout(timer);
+            ctx.revert();
+        };
     }, [onComplete]);
 
     return (
@@ -119,16 +137,16 @@ function Preloader({ onComplete }: PreloaderProps) {
 
                 {/* Bottom Left Content: AAA Logo with Sliding Effect */}
                 <div className="flex items-end justify-between gap-2">
-                    <div className="flex flex-col items-end gap-5 lg:flex-row">
+                    <div className="flex flex-col items-end gap-3 lg:flex-row">
                         <div
                             ref={textRef}
-                            className="flex text-white text-[12vw] leading-none font-bold tracking-tighter"
+                            className="overflow-hidden flex text-white text-9xl lg:text-[15vw] leading-none font-bold tracking-tighter"
                         >
                             <span className="inline-block">A</span>
                             <span className="inline-block -ml-[0.05em]">A</span>
                             <span className="inline-block -ml-[0.05em]">A</span>
                         </div>
-                        <p className="text-white text-sm font-semibold uppercase mb-5">(Architecture + Interior Design Studio)</p>
+                        <p className="text-white text-sm font-semibold uppercase mb-5 max-w-[250px] lg:w-full">(Architecture + Interior Design Studio)</p>
                     </div>
                     <Loader2 className="animate-spin text-white size-5" />
                 </div>
