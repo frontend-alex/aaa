@@ -1,19 +1,24 @@
 "use client";
 
 import { gsap } from "gsap";
-import { isDev, isProd } from "@/config/env";
 import { Copy } from "@/custom/copy";
-import { Preloader } from "@/components/Preloader";
 import { ScrollImage } from "@/custom/scroll-image";
 import { Button } from "@/components/custom/button";
 import { useCallback, useEffect, useRef } from "react";
+import { usePreloader } from "@/components/providers/preloader-context";
+
 import { LandingHeader } from "@/components/landing/landing-header";
+
+import { BigText, Section, SmallText } from "@/components/components";
+import { SlidingText } from "@/components/custom/sliding-text";
+import Link from "next/link";
 
 
 export default function Page() {
   const pageWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Animate reveal-text elements
+  const { registerOnComplete } = usePreloader();
+
   const animateRevealTexts = useCallback(() => {
     const tl = gsap.timeline();
 
@@ -34,44 +39,97 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (!isProd) {
-      animateRevealTexts();
-    }
-  }, [animateRevealTexts]);
+    const unregister = registerOnComplete(animateRevealTexts);
+    return unregister;
+  }, [registerOnComplete, animateRevealTexts]);
 
   return (
-    <div ref={pageWrapperRef} className="flex flex-col min-h-screen w-full">
-      {isProd && <Preloader onComplete={animateRevealTexts} />}
+    <div ref={pageWrapperRef} className="flex flex-col min-h-screen gap-10 w-full">
+      <LandingHeader />
 
-      <LandingHeader onPreloaderComplete={animateRevealTexts} />
+      <div className="flex flex-col gap-30">
+        <Section className="relative">
+          <BigText className="hidden lg:flex">
+            Experience <br />
+            focused design
+          </BigText>
 
-      {/* Next section - z-20 (covers the fixed content) */}
-      <section className="min-h-screen z-20 p-5 py-10 flex flex-col gap-5">
-        <h1 className="big-text hidden lg:flex">Experience <br />
-          focused design</h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          <div />
-          <ScrollImage src="/images/sec1.jpg" className="mx-auto" alt="section-1-image" width={1920} height={1080} />
-          <div />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          <div />
-          <div className="mx-auto flex flex-col gap-5 font-medium text-lg">
+          <div className="flex flex-col gap-5 max-w-lg mx-auto">
+            <SmallText className="lg:absolute lg:right-5 lg:top-[60%]">(Our Studio)</SmallText>
+            <ScrollImage src="/images/sec1.jpg" className="mx-auto hidden lg:flex" alt="section-1-image" width={1920} height={1080} />
             <Copy>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+              <p className="text-xl font-medium">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
             </Copy>
             <Copy>
-              <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <p className="text-xl font-medium">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </Copy>
+            <Button className="w-max">Learn more about our studio</Button>
           </div>
-          <p className="small-text flex justify-end">(Our Studio)</p>
-        </div>
+        </Section>
 
-        <Button className="mx-auto">Learn about our studio</Button>
-      </section>
-    </div>
+        <Section>
+          <div className="flex items-center justify-between gap-5">
+            <BigText>
+              featured <br /> Works
+            </BigText>
+            <BigText>(06)</BigText>
+          </div>
+
+          <div className="flex flex-col gap-5 lg:gap-50">
+            <div className="flex flex-col lg:flex-row gap-5 w-full">
+              <Link href={"#"} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
+                <ScrollImage src="/images/sec2-2.png" className="w-full" alt="section-2-1-image" width={1920} height={1080} />
+                <div className="flex flex-col">
+                  <SmallText>(01)</SmallText>
+                  <SmallText>S Tower</SmallText>
+                  <SmallText>
+                    <SlidingText hoverText="View Project">2021</SlidingText>
+                  </SmallText>
+                </div>
+              </Link>
+              <Link href={"#"} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full group">
+                <div className="order-last lg:order-first flex flex-col">
+                  <SmallText>(02)</SmallText>
+                  <SmallText>NV TOWER</SmallText>
+                  <SmallText>
+                    <SlidingText hoverText="View Project">2021</SlidingText>
+                  </SmallText>
+                </div>
+                <ScrollImage src="/images/sec2-1.png" className="w-full" alt="section-1-image" width={1920} height={1080} />
+              </Link>
+            </div>
+
+            <div className="flex flex-col gap-5 lg:gap-20 w-full">
+              <div className="w-full">
+                <Link href={"#"} className="flex flex-col lg:flex-row gap-3 lg:w-max group h-max">
+                  <ScrollImage src="/images/sec2-4.png" className="w-full xl:w-[1000px] xl:h-[500px]" imageClassName="object-cover" alt="section-2-1-image" width={1000} height={500} />
+                  <div className="flex flex-col">
+                    <SmallText>(03)</SmallText>
+                    <SmallText>S Tower</SmallText>
+                    <SmallText>
+                      <SlidingText hoverText="View Project">2021</SlidingText>
+                    </SmallText>
+                  </div>
+                </Link>
+              </div>
+              <div className="w-full flex lg:justify-end">
+                <Link href={"#"} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full lg:w-max group">
+                  <ScrollImage src="/images/sec2-5.png" className="h-[500px]" imageClassName="object-cover lg:object-contain" alt="section-1-image" width={1000} height={500} />
+                  <div className="flex flex-col">
+                    <SmallText>(04)</SmallText>
+                    <SmallText>NV TOWER</SmallText>
+                    <SmallText>
+                      <SlidingText hoverText="View Project">2021</SlidingText>
+                    </SmallText>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Section>
+      </div >
+    </div >
   );
 }
+
 

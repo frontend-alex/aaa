@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import LenisProvider from "@/components/providers/lenis-provider";
+import { PreloaderProvider } from "@/components/providers/preloader-context";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
@@ -33,9 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LenisProvider>
-          <main className="flex flex-col justify-between min-h-screen w-full">
-            {children}
-          </main>
+          <PreloaderProvider>
+            <main className="flex flex-col justify-between min-h-screen w-full">
+              {children}
+            </main>
+          </PreloaderProvider>
         </LenisProvider>
       </body>
     </html>
