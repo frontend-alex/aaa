@@ -2,6 +2,7 @@
 
 import { isProd } from "@/config/env";
 import { Preloader } from "@/components/Preloader";
+import { setScrollEnabled } from "@/lib/lenis";
 import {
     createContext,
     useCallback,
@@ -21,11 +22,11 @@ const PreloaderContext = createContext<PreloaderContextValue>({
     registerOnComplete: () => () => { },
 });
 
-const STORAGE_KEY = "preloader-shown";
+// Module-level flag — resets on every page load/refresh, persists across client-side navigations
+let hasShownPreloader = false;
 
 function PreloaderProvider({ children }: { children: React.ReactNode }) {
-    const alreadyShown = typeof window !== "undefined" && sessionStorage.getItem(STORAGE_KEY) === "true";
-    const shouldSkip = !isProd || alreadyShown;
+    const shouldSkip = !isProd || hasShownPreloader;
 
     const [completed, setCompleted] = useState(shouldSkip);
     const callbacksRef = useRef<Set<() => void>>(new Set());
@@ -45,10 +46,17 @@ function PreloaderProvider({ children }: { children: React.ReactNode }) {
     }, [shouldSkip]);
 
     const handlePreloaderComplete = useCallback(() => {
+        hasShownPreloader = true;
         setCompleted(true);
-        sessionStorage.setItem(STORAGE_KEY, "true");
         callbacksRef.current.forEach((cb) => cb());
     }, []);
+
+    // Safety: ensure scroll is enabled if we skip the preloader
+    useEffect(() => {
+        if (shouldSkip) {
+            setScrollEnabled(true);
+        }
+    }, [shouldSkip]);
 
     return (
         <PreloaderContext.Provider value={{ completed, registerOnComplete }}>
@@ -65,3 +73,4 @@ function usePreloader() {
 }
 
 export { PreloaderProvider, usePreloader };
+

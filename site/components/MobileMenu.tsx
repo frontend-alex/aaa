@@ -11,6 +11,7 @@ import { type VariantProps } from "class-variance-authority";
 import { buttonVariants } from "@/components/ui/button";
 import { setScrollEnabled } from "@/lib/lenis";
 import { SlidingText } from "./custom/sliding-text";
+import { Logo } from "./Navbar";
 
 interface MobileMenuProps {
     variant?: VariantProps<typeof buttonVariants>["variant"];
@@ -60,7 +61,7 @@ function MobileMenu({
                     >
                         {/* Header */}
                         <div className="flex justify-between items-center text-white">
-                            <h1 className="text-2xl lg:text-5xl font-semibold tracking-tighter capitalize">AAA Architecture</h1>
+                            <Logo />
                             <Button
                                 onClick={() => setIsMenuOpen(false)}
                                 variant="ghost"

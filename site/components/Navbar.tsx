@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link"
+import Image from "next/image";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
@@ -17,7 +19,7 @@ gsap.registerPlugin(ScrollTrigger);
 function Logo({ className }: { className?: string }) {
     return (
         <Link href="/" className={cn("text-2xl lg:text-5xl font-semibold tracking-tighter block overflow-hidden", className)}>
-            <span className="reveal-text block translate-y-full">AAA Architecture</span>
+            <Image src="/svgs/white-logo.svg" className="reveal-text" alt="Logo" width={50} height={50} />
         </Link>
     )
 }

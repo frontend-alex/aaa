@@ -95,7 +95,7 @@ function LandingHeader() {
                 {/* Default background image */}
                 <div
                     ref={bgDefaultRef}
-                    className="absolute inset-0 bg-cover bg-center bg-fixed"
+                    className="absolute inset-0 bg-cover bg-center lg:bg-fixed"
                     style={{
                         backgroundImage: `url('${BACKGROUND_IMAGES[0]}')`,
                         transformOrigin: "center center",
@@ -107,7 +107,7 @@ function LandingHeader() {
                 {/* Hover background image (hidden by default via clip-path) */}
                 <div
                     ref={bgHoverRef}
-                    className="absolute inset-0 bg-cover bg-center bg-fixed"
+                    className="absolute inset-0 bg-cover bg-center lg:bg-fixed"
                     style={{
                         backgroundImage: `url('${BACKGROUND_IMAGES[1]}')`,
                         clipPath: "inset(0% 0% 100% 0%)",

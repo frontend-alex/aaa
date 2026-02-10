@@ -1,17 +1,19 @@
 "use client";
 
+import Link from "next/link";
+
 import { gsap } from "gsap";
 import { Copy } from "@/custom/copy";
 import { ScrollImage } from "@/custom/scroll-image";
 import { Button } from "@/components/custom/button";
 import { useCallback, useEffect, useRef } from "react";
-import { usePreloader } from "@/components/providers/preloader-context";
 
 import { LandingHeader } from "@/components/landing/landing-header";
+import { usePreloader } from "@/components/providers/preloader-context";
 
-import { BigText, Section, SmallText } from "@/components/components";
+
+import { BigText, Section, SlidingButton, SmallText } from "@/components/components";
 import { SlidingText } from "@/components/custom/sliding-text";
-import Link from "next/link";
 
 
 export default function Page() {
@@ -83,7 +85,7 @@ export default function Page() {
                   <SmallText>(01)</SmallText>
                   <SmallText>S Tower</SmallText>
                   <SmallText>
-                    <SlidingText hoverText="View Project">2021</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>Present</SlidingText>
                   </SmallText>
                 </div>
               </Link>
@@ -92,7 +94,7 @@ export default function Page() {
                   <SmallText>(02)</SmallText>
                   <SmallText>NV TOWER</SmallText>
                   <SmallText>
-                    <SlidingText hoverText="View Project">2021</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2021</SlidingText>
                   </SmallText>
                 </div>
                 <ScrollImage src="/images/sec2-1.png" className="w-full" alt="section-1-image" width={1920} height={1080} />
@@ -105,25 +107,48 @@ export default function Page() {
                   <ScrollImage src="/images/sec2-4.png" className="w-full xl:w-[1000px] xl:h-[500px]" imageClassName="object-cover" alt="section-2-1-image" width={1000} height={500} />
                   <div className="flex flex-col">
                     <SmallText>(03)</SmallText>
-                    <SmallText>S Tower</SmallText>
+                    <SmallText>Adora 3</SmallText>
                     <SmallText>
-                      <SlidingText hoverText="View Project">2021</SlidingText>
+                      <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2021</SlidingText>
                     </SmallText>
                   </div>
                 </Link>
               </div>
-              <div className="w-full flex lg:justify-end">
+              <div className="w-full flex lg:justify-center">
                 <Link href={"#"} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full lg:w-max group">
                   <ScrollImage src="/images/sec2-5.png" className="h-[500px]" imageClassName="object-cover lg:object-contain" alt="section-1-image" width={1000} height={500} />
                   <div className="flex flex-col">
                     <SmallText>(04)</SmallText>
-                    <SmallText>NV TOWER</SmallText>
+                    <SmallText>Summer villa R1</SmallText>
                     <SmallText>
-                      <SlidingText hoverText="View Project">2021</SlidingText>
+                      <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2020</SlidingText>
                     </SmallText>
                   </div>
                 </Link>
               </div>
+            </div>
+            <div className="flex flex-col lg:flex-row gap-5 w-full">
+              <Link href={"#"} className="flex flex-col lg:flex-row  gap-3 w-full group">
+                <ScrollImage src="/images/sec2-7.jpg" className="w-full" alt="section-1-image" width={1920} height={1080} />
+                <div className="flex flex-col">
+                  <SmallText>(05)</SmallText>
+                  <SmallText>Amari Residence</SmallText>
+                  <SmallText>
+                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2023</SlidingText>
+                  </SmallText>
+                </div>
+              </Link>
+
+              <Link href={"#"} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
+                <div className="order-last lg:order-first flex flex-col">
+                  <SmallText>(06)</SmallText>
+                  <SmallText>Desizo Monni Administrative Building</SmallText>
+                  <SmallText>
+                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2018</SlidingText>
+                  </SmallText>
+                </div>
+                <ScrollImage src="/images/sec2-8.jpg" className="w-full" alt="section-2-1-image" width={1920} height={1080} />
+              </Link>
             </div>
           </div>
         </Section>
