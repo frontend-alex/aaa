@@ -22,11 +22,12 @@ const PreloaderContext = createContext<PreloaderContextValue>({
     registerOnComplete: () => () => { },
 });
 
-// Module-level flag — resets on every page load/refresh, persists across client-side navigations
-let hasShownPreloader = false;
+function hasShownPreloader() {
+    return typeof window !== 'undefined' && sessionStorage.getItem('preloaderShown') === 'true';
+}
 
 function PreloaderProvider({ children }: { children: React.ReactNode }) {
-    const shouldSkip = !isProd || hasShownPreloader;
+    const shouldSkip = !isProd || hasShownPreloader();
 
     const [completed, setCompleted] = useState(shouldSkip);
     const callbacksRef = useRef<Set<() => void>>(new Set());
@@ -46,7 +47,7 @@ function PreloaderProvider({ children }: { children: React.ReactNode }) {
     }, [shouldSkip]);
 
     const handlePreloaderComplete = useCallback(() => {
-        hasShownPreloader = true;
+        sessionStorage.setItem('preloaderShown', 'true');
         setCompleted(true);
         callbacksRef.current.forEach((cb) => cb());
     }, []);
@@ -60,9 +61,7 @@ function PreloaderProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <PreloaderContext.Provider value={{ completed, registerOnComplete }}>
-            {isProd && !completed && (
-                <Preloader onComplete={handlePreloaderComplete} />
-            )}
+            <Preloader onComplete={handlePreloaderComplete} skip={shouldSkip} />
             {children}
         </PreloaderContext.Provider>
     );

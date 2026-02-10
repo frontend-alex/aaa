@@ -7,9 +7,10 @@ import { setScrollEnabled } from "@/lib/lenis";
 
 interface PreloaderProps {
     onComplete?: () => void;
+    skip?: boolean;
 }
 
-function Preloader({ onComplete }: PreloaderProps) {
+function Preloader({ onComplete, skip = false }: PreloaderProps) {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,12 @@ function Preloader({ onComplete }: PreloaderProps) {
     const overlayRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (skip) {
+            if (containerRef.current) containerRef.current.style.display = "none";
+            onComplete?.();
+            return;
+        }
+
         // 1. Initial lock attempt
         setScrollEnabled(false);
 
