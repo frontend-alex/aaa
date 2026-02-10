@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
 type CompProp = {
     className?: string,
@@ -29,4 +30,13 @@ function BigText({ className, children }: CompProp) {
     )
 }
 
-export { Section, SmallText, BigText }
+function SlidingButton({ className, children, icon: Icon = ArrowRight }: CompProp & { icon?: React.ElementType }) {
+    return (
+        <div className={cn("flex items-center gap-1", className)}>
+            {children}
+            <Icon size={12} strokeWidth={3} />
+        </div>
+    )
+}
+
+export { Section, SmallText, BigText, SlidingButton }
