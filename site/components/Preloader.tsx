@@ -123,7 +123,7 @@ function Preloader({ onComplete, skip = false }: PreloaderProps) {
         <div
             ref={containerRef}
             className="fixed inset-0 z-9999 pointer-events-none"
-            style={{ pointerEvents: "auto" }}
+            style={{ pointerEvents: skip ? "none" : "auto", display: skip ? "none" : undefined }}
         >
             {/* Dark Overlay Background */}
             <div
