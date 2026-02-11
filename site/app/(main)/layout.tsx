@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LenisProvider>
-          <main className="flex flex-col justify-between min-h-screen w-full">
+          <main className="flex flex-col gap-30 justify-between min-h-screen w-full">
             <Navbar />
             {children}
           </main>

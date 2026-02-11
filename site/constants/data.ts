@@ -16,3 +16,9 @@ export const NAV_LINKS = [
         href: "/gallery",
     }
 ]
+
+export const OFFICE_HOURS = {
+    open: 9, // 9 AM
+    close: 17, // 5 PM
+    timeZone: "Europe/Sofia"
+}

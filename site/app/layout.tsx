@@ -5,6 +5,7 @@ import { PreloaderProvider } from "@/components/providers/preloader-context";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -35,12 +36,15 @@ export default function RootLayout({
       >
         <LenisProvider>
           <PreloaderProvider>
-            <main className="flex flex-col justify-between min-h-screen w-full">
-              {children}
-            </main>
+            <div className="relative z-10 bg-background w-full shadow-2xl">
+              <main className="flex flex-col gap-30 justify-between min-h-screen w-full">
+                {children}
+                <Footer />
+              </main>
+            </div>
           </PreloaderProvider>
         </LenisProvider>
-      </body>
-    </html>
+      </body >
+    </html >
   );
 }

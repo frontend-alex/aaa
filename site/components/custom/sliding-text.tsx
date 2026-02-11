@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import React from 'react'
 
 type Direction = 'left' | 'right' | 'up' | 'down'
@@ -6,6 +7,7 @@ type SlidingTextProps = {
     children: React.ReactNode
     hoverText?: React.ReactNode
     direction?: Direction
+    className?: string
 }
 
 // Only animate on md and above
@@ -30,7 +32,7 @@ const DUPLICATE_HOVER_CLASSES: Record<Direction, string> = {
     down: 'lg:group-hover:translate-y-0',
 }
 
-function SlidingText({ children, hoverText, direction = 'up' }: SlidingTextProps) {
+function SlidingText({ children, hoverText, direction = 'up', className }: SlidingTextProps) {
     const hasCustomHover = hoverText !== undefined;
 
     return (
@@ -38,26 +40,26 @@ function SlidingText({ children, hoverText, direction = 'up' }: SlidingTextProps
             <span className="relative inline-block">
                 {hasCustomHover && (
                     <span className="invisible grid whitespace-nowrap leading-4.5 [&>*]:[grid-area:1/1]" aria-hidden="true">
-                        <span>{children}</span>
-                        <span>{hoverText}</span>
+                        <span className={className}>{children}</span>
+                        <span className={className}>{hoverText}</span>
                     </span>
                 )}
 
                 {/* Original text sliding out */}
                 <span
-                    className={`${hasCustomHover ? 'absolute left-0 top-0' : ''} inline-block whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${ORIGINAL_TEXT_CLASSES[direction]}`}
+                    className={cn(`${hasCustomHover ? 'absolute left-0 top-0' : ''} inline-block whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${ORIGINAL_TEXT_CLASSES[direction]}`, className)}
                 >
                     {children}
                 </span>
 
                 {/* Duplicate text sliding in */}
                 <span
-                    className={`absolute left-0 top-0 hidden lg:inline-block whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${DUPLICATE_START_CLASSES[direction]} ${DUPLICATE_HOVER_CLASSES[direction]}`}
+                    className={cn(`absolute left-0 top-0 hidden lg:inline-block whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${DUPLICATE_START_CLASSES[direction]} ${DUPLICATE_HOVER_CLASSES[direction]}`, className)}
                 >
                     {hoverText ?? children}
                 </span>
             </span>
-        </span>
+        </span >
     )
 }
 

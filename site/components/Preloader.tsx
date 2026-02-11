@@ -115,6 +115,7 @@ function Preloader({ onComplete, skip = false }: PreloaderProps) {
 
         return () => {
             clearTimeout(timer);
+            setScrollEnabled(true);
             ctx.revert();
         };
     }, [onComplete]);

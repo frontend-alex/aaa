@@ -16,7 +16,7 @@ function Section({ className, children }: CompProp) {
 
 function SmallText({ className, children }: CompProp) {
     return (
-        <p className={cn("small-text", className)}>
+        <p className={cn("uppercase text-sm font-semibold", className)}>
             {children}
         </p>
     )
@@ -24,7 +24,7 @@ function SmallText({ className, children }: CompProp) {
 
 function BigText({ className, children }: CompProp) {
     return (
-        <h1 className={cn("big-text", className)}>
+        <h1 className={cn("text-4xl sm:text-5xl lg:text-7xl xl:text-9xl tracking-tighter leading-[0.85] uppercase font-medium", className)}>
             {children}
         </h1>
     )
