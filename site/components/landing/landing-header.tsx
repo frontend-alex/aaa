@@ -10,8 +10,8 @@ import { RevealWrapper } from "@/custom/stagger-text";
 gsap.registerPlugin(ScrollTrigger);
 
 const BACKGROUND_IMAGES = [
-    "/images/bg.png",
-    "/images/bg2.png",
+    "/images/header/bg.png",
+    "/images/header/bg2.png",
 ];
 
 function LandingHeader() {
@@ -65,18 +65,18 @@ function LandingHeader() {
     useEffect(() => {
         if (!overlayRef.current || !headerRef.current) return;
 
-        gsap.to(overlayRef.current, {
-            opacity: 0.6,
-            scrollTrigger: {
-                trigger: headerRef.current,
-                start: "60% top",
-                end: "bottom top",
-                scrub: true,
-            },
+        const overlayTrigger = ScrollTrigger.create({
+            trigger: headerRef.current,
+            start: "60% top",
+            end: "bottom top",
+            scrub: true,
+            animation: gsap.to(overlayRef.current, {
+                opacity: 0.6,
+            }),
         });
 
         return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            overlayTrigger.kill();
             timelineRef.current?.kill();
         };
     }, []);
@@ -85,7 +85,7 @@ function LandingHeader() {
         <>
             {/* Navbar wrapper - Moved outside header for Safari stacking context fix */}
             <div className="absolute top-0 left-0 w-full z-50">
-                <Navbar className="text-white p-5 navbar-root" />
+                <Navbar landing className="text-white p-5 navbar-root" />
             </div>
 
             <header

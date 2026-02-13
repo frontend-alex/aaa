@@ -22,3 +22,27 @@ export const OFFICE_HOURS = {
     close: 17, // 5 PM
     timeZone: "Europe/Sofia"
 }
+
+export const PROGRESS_STEPS = [
+    {
+        name: "Sketch Design"
+    },
+    {
+        name: "Design Development"
+    },
+    {
+        name: "Development Application"
+    },
+    {
+        name: "Interior Design"
+    },
+    {
+        name: "Building approval plans + documentation"
+    },
+    {
+        name: "Construction Phase"
+    },
+    {
+        name: "Construction plans + documentation"
+    },
+]

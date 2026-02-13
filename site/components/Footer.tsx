@@ -4,7 +4,7 @@ import Image from "next/image"
 
 import { Copy } from "./custom/copy"
 import { Button } from "./custom/button"
-import { Section, SmallText } from "./components"
+import { MediumText, Section, SmallText } from "./components"
 import { OFFICE_HOURS } from "@/constants/data"
 import { useEffect, useState } from "react"
 import { toZonedTime, format } from "date-fns-tz"
@@ -47,9 +47,9 @@ function Footer() {
             <div className="flex flex-col lg:flex-row justify-between gap-10 border-t border-neutral-200 min-h-[50dvh] py-10 px-5">
                 <div className="flex flex-col gap-10">
                     <Copy>
-                        <h3 className="text-4xl lg:text-5xl font-medium">
+                        <MediumText className="leading-[1.2]">
                             Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
-                        </h3>
+                        </MediumText>
                     </Copy>
                     <Button className="w-max">Tell us about your project</Button>
                 </div>
@@ -67,7 +67,7 @@ function Footer() {
                         <SmallText><span className="font-bold">H:</span> Monday to Friday, {OFFICE_HOURS.open}am - {OFFICE_HOURS.close}pm</SmallText>
                     </div>
 
-                    <Image src="/images/cert-image.png" alt="certificate image" width={100} height={100} />
+                    <Image src="/images/footer/cert-image.png" alt="certificate image" width={100} height={100} />
                 </div>
             </div>
 
@@ -98,7 +98,7 @@ function Footer() {
                     </SlidingText>
                 </SmallText>
                 <SmallText>
-                    <SlidingText className="underline">
+                    <SlidingText>
                         Site by AIVANOV
                     </SlidingText>
                 </SmallText>

@@ -46,9 +46,9 @@ function ScrollImage({ src, alt, width, height, className, imageClassName }: Scr
 
         // Subtle parallax — image drifts vertically within the overflow-hidden container
         gsap.fromTo(imageRef.current,
-            { yPercent: -10 },
+            { yPercent: -7 },
             {
-                yPercent: 10,
+                yPercent: 7,
                 ease: "none",
                 scrollTrigger: {
                     trigger: containerRef.current,
@@ -84,9 +84,13 @@ function ScrollImage({ src, alt, width, height, className, imageClassName }: Scr
                     transformOrigin: "center center",
                     willChange: "transform, filter"
                 }}
+                onLoad={() => {
+                    ScrollTrigger.refresh();
+                }}
             />
         </div>
     );
 }
 
 export { ScrollImage };
+

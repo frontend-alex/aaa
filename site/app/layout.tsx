@@ -1,11 +1,13 @@
 import "@/styles/globals.css";
 
 import LenisProvider from "@/components/providers/lenis-provider";
+
+import { Footer } from "@/components/Footer";
 import { PreloaderProvider } from "@/components/providers/preloader-context";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { Footer } from "@/components/Footer";
+import { TransitionProvider } from "@/components/providers/transition-provider";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -34,17 +36,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LenisProvider>
-          <PreloaderProvider>
-            <div className="relative z-10 bg-background w-full shadow-2xl">
-              <main className="flex flex-col gap-30 justify-between min-h-screen w-full">
+        <TransitionProvider>
+          <LenisProvider>
+            <PreloaderProvider>
+              <main className="flex flex-col justify-between min-h-screen w-full">
                 {children}
                 <Footer />
               </main>
-            </div>
-          </PreloaderProvider>
-        </LenisProvider>
-      </body >
+            </PreloaderProvider>
+          </LenisProvider>
+        </TransitionProvider>
+      </body>
     </html >
   );
 }

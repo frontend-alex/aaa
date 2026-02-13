@@ -126,14 +126,6 @@
   }
 }
 
-.small-text {
-  @apply uppercase text-sm font-semibold;
-}
-
-.big-text {
-  @apply text-5xl lg:text-7xl xl:text-9xl tracking-tighter leading-[0.85] uppercase font-medium;
-}
-
 /* Hide scrollbar when scroll is disabled */
 body.scroll-disabled {
   overflow: hidden;
