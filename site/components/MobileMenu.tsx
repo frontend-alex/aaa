@@ -3,7 +3,6 @@
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/custom/button";
 import { NAV_LINKS } from "@/constants/data";
@@ -12,6 +11,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { setScrollEnabled } from "@/lib/lenis";
 import { SlidingText } from "./custom/sliding-text";
 import { Logo } from "./Navbar";
+import { Link } from "next-transition-router";
 
 interface MobileMenuProps {
     variant?: VariantProps<typeof buttonVariants>["variant"];

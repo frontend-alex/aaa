@@ -458,9 +458,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      envalid:
-        specifier: ^8.1.1
-        version: 8.1.1
+      date-fns-tz:
+        specifier: ^3.2.0
+        version: 3.2.0(date-fns@4.1.0)
       gsap:
         specifier: ^3.12.5
         version: 3.14.2
