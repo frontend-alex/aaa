@@ -10,8 +10,8 @@ import { RevealWrapper } from "@/custom/stagger-text";
 gsap.registerPlugin(ScrollTrigger);
 
 const BACKGROUND_IMAGES = [
-    "/images/bg.png",
-    "/images/bg2.png",
+    "/images/header/bg.png",
+    "/images/header/bg2.png",
 ];
 
 function LandingHeader() {

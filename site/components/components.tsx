@@ -22,6 +22,22 @@ function SmallText({ className, children }: CompProp) {
     )
 }
 
+function BaseText({ className, children }: CompProp) {
+    return (
+        <p className={cn("text-base font-medium tracking-tighter", className)}>
+            {children}
+        </p>
+    )
+}
+
+function MediumText({ className, children }: CompProp) {
+    return (
+        <p className={cn("text-3xl lg:text-5xl font-medium", className)}>
+            {children}
+        </p>
+    )
+}
+
 function BigText({ className, children }: CompProp) {
     return (
         <h1 className={cn("big-text", className)}>
@@ -39,4 +55,4 @@ function SlidingButton({ className, children, icon: Icon = ArrowRight }: CompPro
     )
 }
 
-export { Section, SmallText, BigText, SlidingButton }
+export { Section, SmallText, BaseText, MediumText, BigText, SlidingButton }
