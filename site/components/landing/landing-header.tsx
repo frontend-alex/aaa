@@ -85,7 +85,7 @@ function LandingHeader() {
         <>
             {/* Navbar wrapper - Moved outside header for Safari stacking context fix */}
             <div className="absolute top-0 left-0 w-full z-50">
-                <Navbar className="text-white p-5 navbar-root" />
+                <Navbar landing className="text-white p-5 navbar-root" />
             </div>
 
             <header
