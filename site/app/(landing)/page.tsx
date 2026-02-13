@@ -193,7 +193,7 @@ export default function Page() {
         {/* Progress Section */}
         <Section className="flex flex-col lg:flex-row gap-20 justify-start">
           <div className="flex flex-col gap-3">
-            <SmallText>(01)</SmallText>
+            <SmallText>(progress)</SmallText>
             <ScrollImage src="/images/section2/image1.jpg" className="max-w-2xl" alt="Muzeiko image" width={1920} height={1080} imageClassName="object-cover" />
             {PROGRESS_STEPS.map((step, idnex) => (
               <div key={idnex} className="flex items-center gap-2 border-b-2 border-neutral-200 pb-1">

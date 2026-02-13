@@ -47,7 +47,7 @@ function Footer() {
             <div className="flex flex-col lg:flex-row justify-between gap-10 border-t border-neutral-200 min-h-[50dvh] py-10 px-5">
                 <div className="flex flex-col gap-10">
                     <Copy>
-                        <MediumText className="leading-[1.2]">
+                        <MediumText className="leading-[1.2] w-full">
                             Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
                         </MediumText>
                     </Copy>
@@ -71,15 +71,22 @@ function Footer() {
                 </div>
             </div>
 
-            <div className="border-t border-neutral-200 p-5 flex flex-col lg:flex-row justify-between lg:items-end content-center">
-                <div className="flex flex-col">
+            <div className="border-t border-neutral-200 p-5 flex flex-col gap-10 lg:gap-0 lg:flex-row justify-between lg:items-end content-center">
+                <div className="flex flex-col order-last lg:order-none">
                     <SmallText>
                         © AAA {new Date().getFullYear()}
                     </SmallText>
                     <SmallText className="min-h-[1.5em]">
                         {timeString && status ? `${timeString}, ${status}` : "Loading..."}
                     </SmallText>
+
+                    <SmallText className="flex lg:hidden mt-5">
+                        <SlidingText>
+                            Site by AIVANOV
+                        </SlidingText>
+                    </SmallText>
                 </div>
+                {/* <div className="flex flex-row justify-between"> */}
                 <div className="flex flex-col">
                     <SmallText>
                         <SlidingText>
@@ -97,15 +104,16 @@ function Footer() {
                         Instagram
                     </SlidingText>
                 </SmallText>
-                <SmallText>
+                <SmallText className="hidden lg:flex">
                     <SlidingText>
                         Site by AIVANOV
                     </SlidingText>
                 </SmallText>
+                {/* </div> */}
             </div>
 
-            <Image src="/svgs/footer-bg.svg" alt="footer background" className="w-full h-full object-cover" width={100} height={100} />
-        </Section>
+            <Image src="/svgs/footer-bg.svg" alt="footer background" className="hidden lg:flex w-full h-full object-cover" width={100} height={100} />
+        </Section >
     )
 }
 
