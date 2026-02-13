@@ -3,6 +3,8 @@
 import { isProd } from "@/config/env";
 import { Preloader } from "@/components/Preloader";
 import { setScrollEnabled } from "@/lib/lenis";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 import {
     createContext,
     useCallback,
@@ -11,6 +13,8 @@ import {
     useRef,
     useState,
 } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface PreloaderContextValue {
     completed: boolean;
@@ -49,6 +53,12 @@ function PreloaderProvider({ children }: { children: React.ReactNode }) {
         hasShownPreloader = true;
         setCompleted(true);
         callbacksRef.current.forEach((cb) => cb());
+
+        // Recalculate all ScrollTrigger positions after the preloader exits
+        // and the layout has settled
+        requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+        });
     }, []);
 
     // Safety: ensure scroll is enabled if we skip the preloader

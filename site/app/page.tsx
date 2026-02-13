@@ -103,7 +103,7 @@ export default function Page() {
         {/* Variant 2 About section */}
 
         {/* Gallery Section */}
-        <Section>
+        <Section className="lg:gap-20">
           <div className="flex items-center justify-between gap-5">
             <BigText>
               featured <br /> Works
@@ -185,6 +185,8 @@ export default function Page() {
               </Link>
             </div>
           </div>
+
+          <Button className="w-max mx-auto">View All projects</Button>
         </Section>
 
 

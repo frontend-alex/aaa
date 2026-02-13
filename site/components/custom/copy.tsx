@@ -16,8 +16,7 @@ type CopyProps = {
 }
 
 function Copy({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
-    const containerRef = useRef<HTMLElement | null>(null);
-    const elementRefs = useRef<HTMLElement[]>([]);
+    const containerRef = useRef<HTMLDivElement>(null);
     const splitRefs = useRef<SplitText[]>([]);
     const lines = useRef<HTMLElement[]>([]);
 
@@ -27,64 +26,93 @@ function Copy({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
 
             splitRefs.current = [];
             lines.current = [];
-            elementRefs.current = [];
 
-            let elements: Element[] = [];
-            if (containerRef.current.hasAttribute("data-copy-wrapper")) {
-                elements = Array.from(containerRef.current.children);
-            } else {
-                elements = [containerRef.current];
-            }
+            const runSplit = () => {
+                const elements = Array.from(containerRef.current!.children) as HTMLElement[];
 
-            elements.forEach((element) => {
-                elementRefs.current.push(element as HTMLElement);
+                elements.forEach((element) => {
+                    const split = SplitText.create(element, {
+                        type: "lines",
+                        mask: "lines",
+                        linesClass: "line++",
+                        lineThreshold: 0.1,
+                    });
 
-                const split = SplitText.create(element as HTMLElement, {
-                    type: "lines",
-                    mask: "lines",
-                    linesClass: "line++",
-                    lineThreshold: 0.1,
+                    splitRefs.current.push(split);
+
+                    const computedStyle = window.getComputedStyle(element);
+                    const textIndent = computedStyle.textIndent;
+
+                    if (textIndent && textIndent !== "0px") {
+                        if (split.lines.length > 0) {
+                            (split.lines[0] as HTMLElement).style.paddingLeft = textIndent;
+                        }
+                        element.style.textIndent = "0";
+                    }
+
+                    lines.current.push(...split.lines as HTMLElement[]);
                 });
 
-                splitRefs.current.push(split);
+                gsap.set(lines.current, { y: "100%" });
 
-                const computedStyle = window.getComputedStyle(element);
-                const textIndent = computedStyle.textIndent;
+                const animationProps = {
+                    y: "0%",
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power4.out",
+                    delay: delay,
+                };
 
-                if (textIndent && textIndent !== "0px") {
-                    if (split.lines.length > 0) {
-                        (split.lines[0] as HTMLElement).style.paddingLeft = textIndent;
-                    }
-                    (element as HTMLElement).style.textIndent = "0";
+                if (animateOnScroll) {
+                    gsap.to(lines.current, {
+                        ...animationProps,
+                        scrollTrigger: {
+                            trigger: containerRef.current,
+                            start: "top 75%",
+                            once: true,
+                        },
+                    });
+                } else {
+                    gsap.to(lines.current, animationProps);
                 }
-
-                lines.current.push(...split.lines as HTMLElement[]);
-            });
-
-            gsap.set(lines.current, { y: "100%" });
-
-            const animationProps = {
-                y: "0%",
-                duration: 1,
-                stagger: 0.1,
-                ease: "power4.out",
-                delay: delay,
             };
 
-            if (animateOnScroll) {
-                gsap.to(lines.current, {
-                    ...animationProps,
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 75%",
-                        once: true,
-                    },
-                });
-            } else {
-                gsap.to(lines.current, animationProps);
-            }
+            const init = () => {
+                splitRefs.current.forEach(s => s.revert());
+                splitRefs.current = [];
+                lines.current = [];
+                runSplit();
+            };
+
+            // Wait for fonts to load before splitting
+            document.fonts.ready.then(() => {
+                init();
+            });
+
+
+            // Handle Resize / Refresh: Revert splits to allow natural reflow, then re-split
+            const onRefreshInit = () => {
+                splitRefs.current.forEach(s => s.revert());
+            };
+
+            const onRefresh = () => {
+                // We need to rebuild the split and animation
+                // But since runSplit creates the animation/ScrollTrigger, we should be careful.
+                // Simpler approach for now: Just revert. ScrollTrigger.refresh() will re-calculate positions.
+                // But SplitText needs to re-split.
+                // Let's just handle this via a dedicated resize listener or trust ScrollTrigger's "invalidateOnRefresh" if we were using it.
+                // Actually, standard pattern is: revert on refreshInit, split on refresh.
+                splitRefs.current = [];
+                lines.current = [];
+                runSplit();
+            };
+
+            ScrollTrigger.addEventListener("refreshInit", onRefreshInit);
+            ScrollTrigger.addEventListener("refresh", onRefresh);
 
             return () => {
+                ScrollTrigger.removeEventListener("refreshInit", onRefreshInit);
+                ScrollTrigger.removeEventListener("refresh", onRefresh);
                 splitRefs.current.forEach((split) => {
                     if (split) {
                         split.revert();
@@ -95,12 +123,8 @@ function Copy({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
         { scope: containerRef, dependencies: [animateOnScroll, delay] }
     );
 
-    if (React.Children.count(children) === 1) {
-        return React.cloneElement(children as React.ReactElement<{ ref?: React.Ref<HTMLElement> }>, { ref: containerRef });
-    }
-
     return (
-        <div ref={containerRef as React.RefObject<HTMLDivElement>} data-copy-wrapper="true">
+        <div ref={containerRef} data-copy-wrapper="true">
             {children}
         </div>
     );

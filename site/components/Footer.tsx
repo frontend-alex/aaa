@@ -47,7 +47,7 @@ function Footer() {
             <div className="flex flex-col lg:flex-row justify-between gap-10 border-t border-neutral-200 min-h-[50dvh] py-10 px-5">
                 <div className="flex flex-col gap-10">
                     <Copy>
-                        <MediumText>
+                        <MediumText className="leading-[1.2]">
                             Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
                         </MediumText>
                     </Copy>

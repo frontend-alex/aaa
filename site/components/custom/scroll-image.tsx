@@ -84,6 +84,9 @@ function ScrollImage({ src, alt, width, height, className, imageClassName }: Scr
                     transformOrigin: "center center",
                     willChange: "transform, filter"
                 }}
+                onLoad={() => {
+                    ScrollTrigger.refresh();
+                }}
             />
         </div>
     );

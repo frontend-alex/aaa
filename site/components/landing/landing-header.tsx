@@ -65,18 +65,18 @@ function LandingHeader() {
     useEffect(() => {
         if (!overlayRef.current || !headerRef.current) return;
 
-        gsap.to(overlayRef.current, {
-            opacity: 0.6,
-            scrollTrigger: {
-                trigger: headerRef.current,
-                start: "60% top",
-                end: "bottom top",
-                scrub: true,
-            },
+        const overlayTrigger = ScrollTrigger.create({
+            trigger: headerRef.current,
+            start: "60% top",
+            end: "bottom top",
+            scrub: true,
+            animation: gsap.to(overlayRef.current, {
+                opacity: 0.6,
+            }),
         });
 
         return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            overlayTrigger.kill();
             timelineRef.current?.kill();
         };
     }, []);

@@ -33,7 +33,7 @@ function BaseText({ className, children }: CompProp) {
 
 function MediumText({ className, children }: CompProp) {
     return (
-        <p className={cn("text-3xl lg:text-5xl font-medium", className)}>
+        <p className={cn("text-2xl lg:text-5xl font-medium", className)}>
             {children}
         </p>
     )
@@ -41,7 +41,7 @@ function MediumText({ className, children }: CompProp) {
 
 function BigText({ className, children }: CompProp) {
     return (
-        <h1 className={cn("text-5xl lg:text-7xl xl:text-9xl tracking-tighter leading-[0.85] uppercase font-medium", className)}>
+        <h1 className={cn("text-4xl md:text-5xl lg:text-7xl xl:text-9xl tracking-tighter leading-[0.85] uppercase font-medium", className)}>
             {children}
         </h1>
     )
