@@ -41,7 +41,6 @@ export default function RootLayout({
             <PreloaderProvider>
               <main className="flex flex-col justify-between min-h-screen w-full">
                 {children}
-                <Footer />
               </main>
             </PreloaderProvider>
           </LenisProvider>

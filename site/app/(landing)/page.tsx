@@ -15,6 +15,7 @@ import { usePreloader } from "@/components/providers/preloader-context";
 import { PROGRESS_STEPS } from "@/constants/data";
 import { SlidingText } from "@/components/custom/sliding-text";
 import { BaseText, BigText, MediumText, Section, SlidingButton, SmallText } from "@/components/components";
+import { Footer } from "@/components/Footer";
 
 
 export default function Page() {
@@ -227,6 +228,7 @@ export default function Page() {
         {/* Progress Section */}
 
       </div >
+      <Footer />
     </div >
   );
 }
