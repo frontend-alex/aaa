@@ -1,21 +1,21 @@
 "use client";
 
 import { projectsData } from "@/constants/data";
-import { Copy } from "@/custom/copy";
+import { Text } from "@/custom/text/text";
 import { BigText, Section, SmallText } from "@/components/components";
 import { InfiniteScroll } from "@/components/ui/infinite-scroll";
 import { Navbar } from "@/components/Navbar";
 import { ScrollImage } from "@/components/custom/scroll-image";
-import { SlidingText } from "@/components/custom/sliding-text";
+import { SlidingText } from "@/components/custom/text/sliding-text";
 import { ArrowRight } from "lucide-react";
 import { Link } from "next-transition-router";
 
 export default function ArchivePage() {
     return (
         <main className="flex flex-col justify-between max-h-screen min-h-screen">
-            <Navbar className="p-5" landing={false} />
+            <Navbar className="p-5" />
 
-            <Copy delay={0.5} animateOnScroll={false}>
+            <Text delay={0.5} animateOnScroll={false}>
                 <InfiniteScroll
                     items={projectsData}
                     className="pointer-events-auto hidden lg:flex"
@@ -29,7 +29,7 @@ export default function ArchivePage() {
                         </div>
                     )}
                 />
-            </Copy>
+            </Text>
 
             <Section className="flex lg:hidden flex-col gap-5">
                 {projectsData.map((project, i) => (
@@ -44,16 +44,16 @@ export default function ArchivePage() {
             </Section>
 
             <section className="hidden lg:flex items-end justify-between p-5">
-                <Copy delay={0.7} animateOnScroll={false}>
+                <Text delay={0.7} animateOnScroll={false}>
                     <BigText className="leading-[1.1] lg:text-4xl xl:text-6xl">
                         Archive
                     </BigText>
-                </Copy>
-                <Copy delay={0.9} animateOnScroll={false}>
+                </Text>
+                <Text delay={0.9} animateOnScroll={false}>
                     <SmallText>
                         (Scroll)
                     </SmallText>
-                </Copy>
+                </Text>
                 <div className="flex flex-col">
                     <SlidingText
                         hoverText={
@@ -64,11 +64,11 @@ export default function ArchivePage() {
                         }
                         className="cursor-pointer"
                     >
-                        <Copy delay={1.1} animateOnScroll={false}>
+                        <Text delay={1.1} animateOnScroll={false}>
                             <Link href="/in-progress">
                                 <SmallText>In Progress </SmallText>
                             </Link>
-                        </Copy>
+                        </Text>
                     </SlidingText>
                     <SlidingText
                         hoverText={
@@ -79,9 +79,9 @@ export default function ArchivePage() {
                         }
                         className="cursor-pointer"
                     >
-                        <Copy delay={1.2} animateOnScroll={false}>
+                        <Text delay={1.2} animateOnScroll={false}>
                             <SmallText>Works </SmallText>
-                        </Copy>
+                        </Text>
                     </SlidingText>
                 </div>
             </section>

@@ -2,13 +2,13 @@
 
 import Image from "next/image"
 
-import { Copy } from "./custom/copy"
-import { Button } from "./custom/button"
-import { MediumText, Section, SmallText } from "./components"
+import { Button } from "@/custom/button"
+import { MediumText, Section, SmallText } from "@/components/components"
 import { OFFICE_HOURS } from "@/constants/data"
 import { useEffect, useState } from "react"
 import { toZonedTime, format } from "date-fns-tz"
-import { SlidingText } from "./custom/sliding-text"
+import { SlidingText } from "@/custom/text/sliding-text"
+import { Text } from "@/custom/text/text"
 
 function Footer() {
     const [timeString, setTimeString] = useState<string>("")
@@ -46,19 +46,19 @@ function Footer() {
         <Section className="z-20 p-0 gap-0">
             <div className="flex flex-col lg:flex-row justify-between gap-10 border-t border-neutral-200 min-h-[50dvh] py-10 px-5">
                 <div className="flex flex-col gap-10">
-                    <Copy>
+                    <Text>
                         <MediumText className="leading-[1.2] w-full">
                             Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
                         </MediumText>
-                    </Copy>
+                    </Text>
                     <Button className="w-max">Tell us about your project</Button>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <Copy>
+                    <Text>
                         <SmallText>
                             (info)
                         </SmallText>
-                    </Copy>
+                    </Text>
 
                     <div className="flex flex-col max-w-sm">
                         <SmallText className="mb-2"><span className="font-bold">A:</span> Bulgaria, Sofia 1766, Mladost IV, Business Park Sofia, Building 4, fl. 6</SmallText>

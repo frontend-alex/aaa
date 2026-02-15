@@ -15,7 +15,7 @@ type CopyProps = {
     delay?: number;
 }
 
-function Copy({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
+function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const splitRefs = useRef<SplitText[]>([]);
     const lines = useRef<HTMLElement[]>([]);
@@ -130,4 +130,4 @@ function Copy({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
     );
 }
 
-export { Copy }
+export { Text }

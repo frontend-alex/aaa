@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { gsap } from "gsap";
-import { Copy } from "@/custom/copy";
+import { Text } from "@/custom/text/text";
 import { ScrollImage } from "@/custom/scroll-image";
 import { Button } from "@/components/custom/button";
 import { useCallback, useEffect, useRef } from "react";
@@ -13,7 +13,7 @@ import { usePreloader } from "@/components/providers/preloader-context";
 
 
 import { PROGRESS_STEPS } from "@/constants/data";
-import { SlidingText } from "@/components/custom/sliding-text";
+import { SlidingText } from "@/components/custom/text/sliding-text";
 import { BaseText, BigText, MediumText, Section, SlidingButton, SmallText } from "@/components/components";
 import { Footer } from "@/components/Footer";
 
@@ -86,12 +86,12 @@ export default function Page() {
           </div>
 
           <div className="flex flex-col ml-auto gap-5 max-w-2xl">
-            <Copy>
+            <Text>
               <p className="text-xl font-medium">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </Copy>
-            <Copy>
+            </Text>
+            <Text>
               <p className="text-xl font-medium">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            </Copy>
+            </Text>
             <Button className="w-max">Learn more about our studio</Button>
           </div>
 
@@ -205,16 +205,16 @@ export default function Page() {
           </div>
 
           <div className="flex flex-col gap-10 w-full">
-            <Copy>
+            <Text>
               <MediumText className="font-bold leading-[1.2]">
-                Our approach at AAA Architecture
+                Our approach at AAA Architecture
                 is designed to make your journey
                 from concept to completion as
                 smooth and enjoyable as possible.
               </MediumText>
-            </Copy>
+            </Text>
 
-            <Copy>
+            <Text>
               <MediumText className="font-bold leading-[1.2]">
                 With our 6-stage process, we
                 prioritise clarity, collaboration, and
@@ -222,7 +222,7 @@ export default function Page() {
                 keep you informed, inspired, and
                 involved.
               </MediumText>
-            </Copy>
+            </Text>
           </div>
         </Section>
         {/* Progress Section */}

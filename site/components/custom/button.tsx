@@ -1,10 +1,11 @@
 import * as React from "react"
-import { Button as ShadcnButton } from "@/components/ui/button"
-import { type VariantProps } from "class-variance-authority"
-import { cva } from "class-variance-authority"
-import { SlidingText } from "./sliding-text"
+
 import { cn } from "@/lib/utils"
+import { cva } from "class-variance-authority"
 import { buttonVariants } from "@/components/ui/button"
+import { SlidingText } from "@/custom/text/sliding-text"
+import { type VariantProps } from "class-variance-authority"
+import { Button as ShadcnButton } from "@/components/ui/button"
 
 const customButtonVariants = cva(
     "flex flex-row items-center justify-between gap-3 p-5 py-6 uppercase text-sm font-semibold tracking-tighter box-border cursor-pointer group",

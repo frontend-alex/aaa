@@ -5,7 +5,7 @@ import { Button } from "@/custom/button";
 import { Navbar } from "@/components/Navbar";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useCallback } from "react";
-import { RevealWrapper } from "@/custom/stagger-text";
+import { RevealWrapper } from "@/custom/text/stagger-text";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,7 +85,16 @@ function LandingHeader() {
         <>
             {/* Navbar wrapper - Moved outside header for Safari stacking context fix */}
             <div className="absolute top-0 left-0 w-full z-50">
-                <Navbar landing className="text-white p-5 navbar-root" />
+                <Navbar
+                    logoVariant="light"
+                    className="text-white p-5"
+                    linkWrapper={(node) => (
+                        <RevealWrapper className="inline-block">{node}</RevealWrapper>
+                    )}
+                    actionWrapper={(node) => (
+                        <RevealWrapper className="hidden lg:inline-block">{node}</RevealWrapper>
+                    )}
+                />
             </div>
 
             <header

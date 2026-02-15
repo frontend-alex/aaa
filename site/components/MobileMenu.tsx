@@ -9,9 +9,10 @@ import { NAV_LINKS } from "@/constants/data";
 import { type VariantProps } from "class-variance-authority";
 import { buttonVariants } from "@/components/ui/button";
 import { setScrollEnabled } from "@/lib/lenis";
-import { SlidingText } from "./custom/sliding-text";
 import { Logo } from "./Navbar";
 import { Link } from "next-transition-router";
+import { SlidingText } from "@/custom/text/sliding-text";
+import { ContactSheet } from "./ContactSheet";
 
 interface MobileMenuProps {
     variant?: VariantProps<typeof buttonVariants>["variant"];
@@ -39,6 +40,11 @@ function MobileMenu({
     return (
         <>
             <div className={cn("flex items-center gap-3", className)}>
+                {/* <ContactSheet>
+                    <Button>
+                        Get in touch
+                    </Button>
+                </ContactSheet> */}
                 <Button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     variant={variant}
