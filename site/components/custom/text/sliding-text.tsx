@@ -39,7 +39,7 @@ function SlidingText({ children, hoverText, direction = 'up', className }: Slidi
         <span className="relative inline-block overflow-hidden cursor-pointer w-max group">
             <span className="relative inline-block">
                 {hasCustomHover && (
-                    <span className="invisible grid whitespace-nowrap leading-4.5 [&>*]:[grid-area:1/1]" aria-hidden="true">
+                    <span className="invisible grid whitespace-nowrap leading-4.5 [&>*]:[grid-area:1/1]">
                         <span className={className}>{children}</span>
                         <span className={className}>{hoverText}</span>
                     </span>
@@ -54,7 +54,7 @@ function SlidingText({ children, hoverText, direction = 'up', className }: Slidi
 
                 {/* Duplicate text sliding in */}
                 <span
-                    className={cn(`absolute left-0 top-0 hidden lg:inline-block whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${DUPLICATE_START_CLASSES[direction]} ${DUPLICATE_HOVER_CLASSES[direction]}`, className)}
+                    className={cn(`absolute left-0 top-0  whitespace-nowrap leading-4.5 transition-transform duration-300 ease-out ${DUPLICATE_START_CLASSES[direction]} ${DUPLICATE_HOVER_CLASSES[direction]}`, className)}
                 >
                     {hoverText ?? children}
                 </span>

@@ -53,7 +53,7 @@ export function InfiniteScroll<T>({
             cancelAnimationFrame(rafId);
             lenis.destroy();
         };
-    }, []);
+    }, [duplicatedItems]);
 
     return (
         <div

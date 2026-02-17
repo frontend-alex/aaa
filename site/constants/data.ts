@@ -49,34 +49,40 @@ export const PROGRESS_STEPS = [
 
 export const projectsData = [
     {
-        title: "Project One",
+        title: "S Tower",
         category: "Architecture",
-        year: "2023",
+        year: "Present",
         src: "/images/gallery/image1.png",
     },
     {
-        title: "Project Two",
+        title: "NV Towers",
         category: "Interior",
-        year: "2022",
+        year: "2021",
         src: "/images/gallery/image2.png",
     },
     {
-        title: "Project Three",
+        title: "Adora 3",
         category: "Design",
         year: "2021",
         src: "/images/gallery/image3.png",
     },
     {
-        title: "Project Four",
+        title: "Summer Vila R1",
         category: "Construction",
         year: "2020",
         src: "/images/gallery/image4.png",
     },
     {
-        title: "Project Five",
-        category: "Renovation",
-        year: "2019",
+        title: "Amari Residence",
+        category: "Design",
+        year: "2023",
         src: "/images/gallery/image5.jpg",
+    },
+    {
+        title: "Desizo Monni Administrative Building",
+        category: "Architecture",
+        year: "2018",
+        src: "/images/gallery/image6.jpg",
     },
 ];
 

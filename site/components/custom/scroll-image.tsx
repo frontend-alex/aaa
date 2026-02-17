@@ -15,9 +15,11 @@ interface ScrollRevealImageProps {
     height: number;
     className?: string;
     imageClassName?: string;
+    scroller?: string | Element | null;
+    horizontal?: boolean;
 }
 
-function ScrollImage({ src, alt, width, height, className, imageClassName }: ScrollRevealImageProps) {
+function ScrollImage({ src, alt, width, height, className, imageClassName, scroller, horizontal = false }: ScrollRevealImageProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 
@@ -37,23 +39,31 @@ function ScrollImage({ src, alt, width, height, className, imageClassName }: Scr
             ease: "power2.out",
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top 80%",
-                end: "top 40%",
+                scroller: scroller || window,
+                horizontal: horizontal,
+                start: horizontal ? "left 80%" : "top 80%",
+                end: horizontal ? "left 40%" : "top 40%",
                 scrub: 0.5,
                 once: true,
             },
         });
 
         // Subtle parallax — image drifts vertically within the overflow-hidden container
+        const parallaxProps = horizontal
+            ? { from: { xPercent: -7 }, to: { xPercent: 7 } }
+            : { from: { yPercent: -7 }, to: { yPercent: 7 } };
+
         gsap.fromTo(imageRef.current,
-            { yPercent: -7 },
+            parallaxProps.from,
             {
-                yPercent: 7,
+                ...parallaxProps.to,
                 ease: "none",
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
+                    scroller: scroller || window,
+                    horizontal: horizontal,
+                    start: horizontal ? "left right" : "top bottom",
+                    end: horizontal ? "right left" : "bottom top",
                     scrub: true,
                 },
             }
@@ -79,13 +89,24 @@ function ScrollImage({ src, alt, width, height, className, imageClassName }: Scr
                 alt={alt}
                 width={width}
                 height={height}
-                className={`w-full h-full block ${imageClassName || ''}`}
+                className={`hidden lg:block w-full h-full ${imageClassName || ''}`}
                 style={{
                     transformOrigin: "center center",
                     willChange: "transform, filter"
                 }}
                 onLoad={() => {
                     ScrollTrigger.refresh();
+                }}
+            />
+            <Image
+                src={src}
+                alt={alt}
+                width={width}
+                height={height}
+                className={`lg:hidden w-full h-full  ${imageClassName || ''}`}
+                style={{
+                    transformOrigin: "center center",
+                    willChange: "transform, filter"
                 }}
             />
         </div>

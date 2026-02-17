@@ -13,19 +13,24 @@ type CopyProps = {
     children: React.ReactNode;
     animateOnScroll?: boolean;
     delay?: number;
+    once?: boolean;
 }
 
-function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
+function Text({ children, animateOnScroll = true, delay = 0, once = false }: CopyProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const splitRefs = useRef<SplitText[]>([]);
     const lines = useRef<HTMLElement[]>([]);
+    const hasAnimated = useRef(false);
 
     useGSAP(
         () => {
             if (!containerRef.current) return;
+            if (once && hasAnimated.current) return;
 
             splitRefs.current = [];
             lines.current = [];
+
+            hasAnimated.current = true;
 
             const runSplit = () => {
                 const elements = Array.from(containerRef.current!.children) as HTMLElement[];
