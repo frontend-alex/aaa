@@ -97,7 +97,7 @@ function Navbar({
                     {NAV_LINKS.map((link, idx) => {
                         const content = (
                             <Link
-                                className="uppercase text-xs font-bold flex items-center"
+                                className="uppercase text-sm font-bold flex items-center"
                                 href={link.href}
                             >
                                 <SlidingText>{link.name}</SlidingText>

@@ -1,20 +1,20 @@
 export const NAV_LINKS = [
     {
-        name: "News",
-        href: "/news",
-    },
-    {
         name: "Works",
         href: "/works",
     },
     {
-        name: "About",
-        href: "/about",
+        name: "Studio",
+        href: "/studio",
     },
     {
-        name: "Gallery",
-        href: "/gallery",
-    }
+        name: "Process",
+        href: "/process",
+    },
+    {
+        name: "News",
+        href: "/news",
+    },
 ]
 
 export const OFFICE_HOURS = {

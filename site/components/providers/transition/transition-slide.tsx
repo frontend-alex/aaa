@@ -4,15 +4,14 @@ import { useRef, startTransition } from "react";
 import { gsap } from "gsap";
 import { TransitionRouter } from "next-transition-router";
 
-function TransitionProvider({ children }: { children: React.ReactNode }) {
+function TransitionSlide({ children }: { children: React.ReactNode }) {
     const firstLayer = useRef<HTMLDivElement | null>(null);
     const secondLayer = useRef<HTMLDivElement | null>(null);
 
     return (
         <TransitionRouter
             auto={true}
-            leave={(next, from, to) => {
-                console.log({ from, to });
+            leave={(next, _from, _to) => {
 
                 const tl = gsap
                     .timeline({
@@ -91,4 +90,4 @@ function TransitionProvider({ children }: { children: React.ReactNode }) {
     );
 }
 
-export { TransitionProvider }
+export { TransitionSlide }

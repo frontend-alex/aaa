@@ -2,12 +2,11 @@ import "@/styles/globals.css";
 
 import LenisProvider from "@/components/providers/lenis-provider";
 
-import { Footer } from "@/components/Footer";
 import { PreloaderProvider } from "@/components/providers/preloader-context";
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { TransitionProvider } from "@/components/providers/transition-provider";
+import { TransitionFade } from "@/components/providers/transition/transition-fade";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -36,7 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TransitionProvider>
+        <TransitionFade>
           <LenisProvider>
             <PreloaderProvider>
               <main className="flex flex-col justify-between min-h-screen w-full">
@@ -44,7 +43,7 @@ export default function RootLayout({
               </main>
             </PreloaderProvider>
           </LenisProvider>
-        </TransitionProvider>
+        </TransitionFade>
       </body>
     </html >
   );

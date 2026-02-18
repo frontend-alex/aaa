@@ -2,13 +2,14 @@
 
 import Image from "next/image"
 
-import { Button } from "@/custom/button"
 import { MediumText, Section, SmallText } from "@/components/components"
 import { OFFICE_HOURS } from "@/constants/data"
-import { useEffect, useState } from "react"
-import { toZonedTime, format } from "date-fns-tz"
+import { Button } from "@/custom/button"
 import { SlidingText } from "@/custom/text/sliding-text"
 import { Text } from "@/custom/text/text"
+import { format, toZonedTime } from "date-fns-tz"
+import { useEffect, useState } from "react"
+import { ContactSheet } from "./ContactSheet"
 
 function Footer() {
     const [timeString, setTimeString] = useState<string>("")
@@ -51,7 +52,9 @@ function Footer() {
                             Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
                         </MediumText>
                     </Text>
-                    <Button className="w-max">Tell us about your project</Button>
+                    <ContactSheet>
+                        <Button className="w-max">Tell us about your project</Button>
+                    </ContactSheet>
                 </div>
                 <div className="flex flex-col gap-5">
                     <Text>
@@ -104,11 +107,11 @@ function Footer() {
                         Instagram
                     </SlidingText>
                 </SmallText>
-                <SmallText className="hidden lg:flex">
-                    <SlidingText>
+                <SlidingText>
+                    <SmallText link className="hidden lg:flex">
                         Site by AIVANOV
-                    </SlidingText>
-                </SmallText>
+                    </SmallText>
+                </SlidingText>
                 {/* </div> */}
             </div>
 

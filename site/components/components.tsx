@@ -14,9 +14,9 @@ function Section({ className, children }: CompProp) {
     )
 }
 
-function SmallText({ className, children }: CompProp) {
+function SmallText({ className, children, link = false }: CompProp & { link?: boolean }) {
     return (
-        <p className={cn("uppercase text-sm font-semibold", className)}>
+        <p className={cn(`uppercase text-sm font-semibold ${link ? "underline lg:no-underline" : ""}`, className)}>
             {children}
         </p>
     )

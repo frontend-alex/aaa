@@ -1,18 +1,21 @@
 "use client";
 
-import { projectsData } from "@/constants/data";
-import { Text } from "@/custom/text/text";
 import { BigText, Section, SmallText } from "@/components/components";
 import { Navbar } from "@/components/Navbar";
 import { ScrollImage } from "@/components/custom/scroll-image";
 import { SlidingText } from "@/components/custom/text/sliding-text";
+import { projectsData } from "@/constants/data";
+import { slugify } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { Link } from "next-transition-router";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 
 export default function InProgressPage() {
     return (
-        <main className="flex flex-col justify-between max-h-screen min-h-screen">
+        <main
+            className="flex flex-col justify-between max-h-screen min-h-screen"
+        >
             <Navbar className="p-5 order-first" />
 
             <HorizontalScroll
@@ -20,40 +23,48 @@ export default function InProgressPage() {
                 className="pointer-events-auto hidden order-2 lg:flex items-top px-5"
                 getItemKey={(item) => item.title}
                 renderItem={(project, i) => (
-                    <div
+                    <Link
+                        href={`/works/${slugify(project.title)}`}
                         key={i}
                         className="flex flex-col gap-1 w-full cursor-pointer"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain h-[400px]" width={1000} height={1000} />
                         <SmallText>{project.title}</SmallText>
-                    </div>
+                    </Link>
                 )}
             />
 
             <Section className="grid grid-cols-1 md:grid-cols-2 lg:hidden flex-col gap-5 order-2">
                 {projectsData.map((project, i) => (
-                    <div
+                    <Link
+                        href={`/works/${slugify(project.title)}`}
                         key={i}
                         className="flex flex-col gap-3 w-full h-full"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain w-full" width={1000} height={1000} />
                         <SmallText>{project.title}</SmallText>
-                    </div>
+                    </Link>
                 ))}
             </Section>
 
-            <section className="order-first lg:order-last flex flex-col lg:flex-row gap-5 lg:gap-0 lg:items-end justify-between p-5">
-                <Text once delay={0.7} animateOnScroll={false}>
-                    <BigText className="leading-[1.1] lg:text-4xl xl:text-6xl">
-                        in progress
-                    </BigText>
-                </Text>
+            <motion.section
+                initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                transition={{
+                    type: "spring",
+                    stiffness: 60,
+                    damping: 20,
+                    opacity: { duration: 0.5 }
+                }}
+                className="order-first lg:order-last flex flex-col lg:flex-row gap-5 lg:gap-0 lg:items-end justify-between p-5">
+                <BigText className="leading-[1.1] lg:text-4xl xl:text-6xl">
+                    in progress
+                </BigText>
 
-                <Text once delay={0.9} animateOnScroll={false}>
-                    <SmallText className="hidden lg:flex">
-                        (Scroll)
-                    </SmallText>
-                </Text>
+                <SmallText className="hidden lg:flex">
+                    (Scroll)
+                </SmallText>
 
                 <div className="flex flex-row justify-between items-center lg:items-start lg:flex-col">
                     <Link href="/works" className="flex items-center gap-2">
@@ -66,9 +77,7 @@ export default function InProgressPage() {
                             }
                             className="cursor-pointer"
                         >
-                            <Text once delay={1.1} animateOnScroll={false}>
-                                <SmallText>Works</SmallText>
-                            </Text>
+                            <SmallText link>Works</SmallText>
                         </SlidingText>
                     </Link>
 
@@ -82,13 +91,11 @@ export default function InProgressPage() {
                             }
                             className="cursor-pointer"
                         >
-                            <Text once delay={1.2} animateOnScroll={false}>
-                                <SmallText>Archive</SmallText>
-                            </Text>
+                            <SmallText link>Archive</SmallText>
                         </SlidingText>
                     </Link>
                 </div>
-            </section>
+            </motion.section>
         </main >
     );
 }

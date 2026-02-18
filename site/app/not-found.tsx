@@ -17,7 +17,13 @@ export default function NotFound() {
                 <Text animateOnScroll={false}>
                     <BigText className="md:text-[15vw] lg:text-[20vw] xl:text-[27vw]">Oops...</BigText>
                 </Text>
-                <Button onClick={() => router.back()}>Go Back</Button>
+                <Button onClick={() => {
+                    if (window.history.length > 1) {
+                        router.back();
+                    } else {
+                        router.push("/");
+                    }
+                }}>Go Back</Button>
             </div>
             <div className="flex flex-col gap-5 lg:flex-row justify-between">
                 <Text animateOnScroll={false} delay={0.5}>

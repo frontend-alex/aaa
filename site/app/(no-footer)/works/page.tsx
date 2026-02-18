@@ -1,16 +1,17 @@
 "use client";
 
-import { useMemo, useCallback, useState } from "react";
-import { projectsData } from "@/constants/data";
-import { Text } from "@/custom/text/text";
 import { BigText, Section, SmallText } from "@/components/components";
-import { Navbar } from "@/components/Navbar";
 import { ScrollImage } from "@/components/custom/scroll-image";
+import { SortSelect } from "@/components/custom/select/SortSelect";
 import { SlidingText } from "@/components/custom/text/sliding-text";
+import { Navbar } from "@/components/Navbar";
+import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
+import { projectsData } from "@/constants/data";
+import { slugify } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "next-transition-router";
-import { SortSelect } from "@/components/custom/select/SortSelect";
-import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
+import { useCallback, useMemo, useState } from "react";
 
 export default function WorksPage() {
     const [selectedCategory, setSelectedCategory] =
@@ -42,35 +43,45 @@ export default function WorksPage() {
                 className="pointer-events-auto hidden order-2 lg:flex items-top px-5"
                 getItemKey={(item) => item.title}
                 renderItem={(project, i) => (
-                    <div
+                    <Link
+                        href={`/works/${slugify(project.title)}`}
                         key={i}
                         className="flex flex-col gap-1 w-full cursor-pointer"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain h-[400px]" width={1000} height={1000} />
                         <SmallText>{project.title}</SmallText>
-                    </div>
+                    </Link>
                 )}
             />
 
             <Section className="grid grid-cols-1 md:grid-cols-2 lg:hidden flex-col gap-5 order-2">
                 {filteredProjects.map((project, i) => (
-                    <div
+                    <Link
+                        href={`/works/${slugify(project.title)}`}
                         key={i}
                         className="flex flex-col gap-3 w-full h-full"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain w-full" width={1000} height={1000} />
                         <SmallText>{project.title}</SmallText>
-                    </div>
+                    </Link>
                 ))}
             </Section>
 
-            <section className="order-first lg:order-last flex flex-col lg:flex-row gap-5 lg:gap-0 lg:items-end justify-between p-5">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:items-start justify-between lg:justify-start gap-3">
-                    <Text once delay={0.7} animateOnScroll={false}>
-                        <BigText className="leading-[1.1] lg:text-4xl xl:text-6xl">
-                            works
-                        </BigText>
-                    </Text>
+            <motion.section
+                initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                transition={{
+                    type: "spring",
+                    stiffness: 60,
+                    damping: 20,
+                    opacity: { duration: 0.5 }
+                }}
+                className="order-first lg:order-last flex flex-col lg:flex-row gap-5 lg:gap-0 lg:items-end justify-between p-5">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:items-start justify-between lg:justify-start gap-1 lg:gap-3">
+                    <BigText className="leading-[0.6] lg:text-4xl xl:text-6xl">
+                        works
+                    </BigText>
                     <SortSelect
                         options={categories}
                         value={selectedCategory}
@@ -78,13 +89,12 @@ export default function WorksPage() {
                     />
                 </div>
 
-                <Text once delay={0.9} animateOnScroll={false}>
-                    <SmallText className="hidden lg:flex">
-                        (Scroll)
-                    </SmallText>
-                </Text>
+                <SmallText className="hidden lg:flex">
+                    (Scroll)
+                </SmallText>
 
-                <div className="flex flex-row justify-between items-center lg:items-start lg:flex-col">
+                <div
+                    className="flex flex-row justify-between items-center lg:items-start lg:flex-col">
                     <Link href="/archive" className="flex items-center gap-2">
                         <SlidingText
                             hoverText={
@@ -95,9 +105,7 @@ export default function WorksPage() {
                             }
                             className="cursor-pointer"
                         >
-                            <Text once delay={1.1} animateOnScroll={false}>
-                                <SmallText>Archive</SmallText>
-                            </Text>
+                            <SmallText link>Archive</SmallText>
                         </SlidingText>
                     </Link>
 
@@ -111,13 +119,11 @@ export default function WorksPage() {
                             }
                             className="cursor-pointer"
                         >
-                            <Text once delay={1.2} animateOnScroll={false}>
-                                <SmallText>In Progress</SmallText>
-                            </Text>
+                            <SmallText link>In Progress</SmallText>
                         </SlidingText>
                     </Link>
                 </div>
-            </section>
-        </main >
+            </motion.section>
+        </main  >
     );
 }

@@ -67,7 +67,7 @@ function MobileMenu({
                     >
                         {/* Header */}
                         <div className="flex justify-between items-center text-white">
-                            <Logo />
+                            <Logo variant="light" />
                             <Button
                                 onClick={() => setIsMenuOpen(false)}
                                 variant="ghost"
