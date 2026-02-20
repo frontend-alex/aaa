@@ -135,7 +135,7 @@ function LandingHeader() {
             </header>
 
             {/* Fixed content - z-10 (behind next section, but visible over header bg) */}
-            <div className="fixed flex flex-col justify-between h-[calc(100vh-300px)] w-full bottom-0 p-5 z-10">
+            <div className="fixed flex flex-col justify-between h-[calc(100vh-45%)] w-full bottom-0 p-5 z-10">
                 <div
                     className="flex items-center justify-between uppercase text-sm text-white font-semibold project-info"
                 >
