@@ -5,6 +5,7 @@ import LenisProvider from "@/components/providers/lenis-provider";
 import { PreloaderProvider } from "@/components/providers/preloader-context";
 
 import type { Metadata } from "next";
+
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { TransitionFade } from "@/components/providers/transition/transition-fade";
 

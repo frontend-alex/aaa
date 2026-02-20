@@ -93,7 +93,7 @@ function Navbar({
             <div className={cn("flex justify-between items-center", className)}>
                 <Logo variant={logoVariant} />
 
-                <ul className="hidden lg:flex gap-1">
+                <ul className="hidden lg:flex gap-2">
                     {NAV_LINKS.map((link, idx) => {
                         const content = (
                             <Link
