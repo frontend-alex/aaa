@@ -14,7 +14,7 @@ import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
 export default function ArchivePage() {
     return (
         <main
-            className="flex flex-col justify-between max-h-screen min-h-screen"
+            className="flex flex-col justify-between lg:max-h-screen min-h-screen"
         >
             <Navbar className="p-5 order-first" />
 
