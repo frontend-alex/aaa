@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { BaseText, BigText, Section } from "@/components/components";
+import { BaseText, BigText, Section, SmallText } from "@/components/components";
 
 import { Text } from "@/custom/text/text";
 
@@ -13,16 +13,20 @@ import { ProjectProps } from "@/constants/data";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollImage } from "@/components/custom/scroll-image";
+import { Link } from "next-transition-router";
 
-import { groupImages } from "@/lib/utils";
+import { groupImages, slugify } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { SlidingText } from "@/components/custom/text/sliding-text";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PageClient = ({ project }: { project: ProjectProps }) => {
+const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProject: ProjectProps }) => {
 
     const overlayRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
+    const nextImageRef = useRef<HTMLDivElement>(null);
 
     const imageGroups = useMemo(
         () => groupImages(project.images, project.title),
@@ -45,6 +49,27 @@ const PageClient = ({ project }: { project: ProjectProps }) => {
         return () => {
             overlayTrigger.kill();
             timelineRef.current?.kill();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!nextImageRef.current) return;
+
+        const trigger = ScrollTrigger.create({
+            trigger: nextImageRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            animation: gsap.fromTo(nextImageRef.current, {
+                scale: 1.15,
+            }, {
+                scale: 1,
+                ease: "none",
+            }),
+        });
+
+        return () => {
+            trigger.kill();
         };
     }, []);
 
@@ -82,7 +107,7 @@ const PageClient = ({ project }: { project: ProjectProps }) => {
                                 <BaseText className="lg:text-lg uppercase">{project?.year}</BaseText>
                             </Text>
                             <Text animateOnScroll={false} delay={0.6}>
-                                <BaseText className="lg:text-lg uppercase">(scroll to explore)</BaseText>
+                                <BaseText className="hidden lg:flex lg:text-lg uppercase">(scroll to explore)</BaseText>
                             </Text>
                         </div>
                     </div>
@@ -141,6 +166,47 @@ const PageClient = ({ project }: { project: ProjectProps }) => {
                     )
                 )}
             </Section>
+
+            {/* Next Project */}
+            <Link href={`/works/${slugify(nextProject.title)}`} className="block p-5">
+                <section className="relative w-full h-[300px] lg:h-[500px] overflow-hidden cursor-pointer group">
+                    <div
+                        ref={nextImageRef}
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
+                        style={{
+                            backgroundImage: `url(${nextProject.src})`,
+                            willChange: "transform",
+                        }}
+                    />
+                    <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors duration-500" />
+
+                    <div className="relative z-10 flex flex-col gap-5 justify-between h-full p-5 text-white">
+                        <SlidingText
+                            hoverText={
+                                <div className="hidden lg:flex items-center gap-2">
+                                    <SmallText>{nextProject.title}</SmallText>
+                                    <ArrowRight size={12} />
+                                </div>
+                            }
+                            className="cursor-pointer"
+                        >
+                            <SmallText className="hidden lg:flex" link>Next Project</SmallText>
+                        </SlidingText>
+
+                        <div>
+                            <Text>
+                                <BigText>
+                                    {nextProject.title}
+                                </BigText>
+                            </Text>
+                            <div className="flex gap-8 mt-4">
+                                <SmallText>{nextProject.category}</SmallText>
+                                <SmallText>{nextProject.year}</SmallText>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </Link>
 
             <Footer />
         </main >

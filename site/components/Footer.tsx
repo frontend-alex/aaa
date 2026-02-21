@@ -64,9 +64,9 @@ function Footer() {
                     </Text>
 
                     <div className="flex flex-col max-w-sm">
-                        <SmallText className="mb-2"><span className="font-bold">A:</span> Bulgaria, Sofia 1766, Mladost IV, Business Park Sofia, Building 4, fl. 6</SmallText>
-                        <SmallText><span className="font-bold">E:</span> office@aaa.bg</SmallText>
-                        <SmallText><span className="font-bold">P:</span> (+359 2) 489 9999</SmallText>
+                        <SmallText className="mb-2"><span className="font-bold">A:</span> <a href="https://www.google.com/maps/place/%D0%90+%D0%B8+%D0%90+%D0%90%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D0%B8+%D0%9E%D0%9E%D0%94/@42.6288205,23.3733191,17z/data=!4m14!1m7!3m6!1s0x40aa86cc61c24125:0xc5c6700909fae1d1!2z0JAg0Lgg0JAg0JDRgNGF0LjRgtC10LrRgtC4INCe0J7QlA!8m2!3d42.6288205!4d23.3747618!16s%2Fg%2F1tftplg_!3m5!1s0x40aa86cc61c24125:0xc5c6700909fae1d1!8m2!3d42.6288205!4d23.3747618!16s%2Fg%2F1tftplg_?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="hover:underline">Bulgaria, Sofia 1766, Mladost IV, Business Park Sofia, Building 4, fl. 6</a></SmallText>
+                        <SmallText><span className="font-bold">E:</span> <a href="mailto:office@aaa.bg" className="hover:underline">office@aaa.bg</a></SmallText>
+                        <SmallText><span className="font-bold">P:</span> <a href="tel:+35924899999" className="hover:underline">(+359 2) 489 9999</a></SmallText>
                         <SmallText><span className="font-bold">H:</span> Monday to Friday, {OFFICE_HOURS.open}am - {OFFICE_HOURS.close}pm</SmallText>
                     </div>
 
@@ -83,13 +83,13 @@ function Footer() {
                         {timeString && status ? `${timeString}, ${status}` : "Loading..."}
                     </SmallText>
 
+
                     <SmallText className="flex lg:hidden mt-5">
                         <SlidingText>
                             Site by AIVANOV
                         </SlidingText>
                     </SmallText>
                 </div>
-                {/* <div className="flex flex-row justify-between"> */}
                 <div className="flex flex-col">
                     <SmallText>
                         <SlidingText>
@@ -112,7 +112,6 @@ function Footer() {
                         Site by AIVANOV
                     </SmallText>
                 </SlidingText>
-                {/* </div> */}
             </div>
 
             <Image src="/svgs/footer-bg.svg" alt="footer background" className="hidden lg:flex w-full h-full object-cover" width={100} height={100} />

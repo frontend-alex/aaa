@@ -9,12 +9,14 @@ export default async function Works({ params }: { params: Promise<{ slug: string
 
     const { slug } = await params;
 
-    const project = projectsData.find(
+    const projectIndex = projectsData.findIndex(
         (project) => slugify(project.title) === slug
     );
 
-    if (!project) return <NotFound />
+    if (projectIndex === -1) return <NotFound />
 
+    const project = projectsData[projectIndex];
+    const nextProject = projectsData[(projectIndex + 1) % projectsData.length];
 
-    return <PageClient project={project} />
+    return <PageClient project={project} nextProject={nextProject} />
 }
