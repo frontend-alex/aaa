@@ -101,7 +101,7 @@ function Navbar({
                                 href={link.href}
                             >
                                 <SlidingText>{link.name}</SlidingText>
-                                {link.name !== lastLink.name ? "," : ""}
+                                {/* {link.name !== lastLink.name ? "," : ""} */}
                             </Link>
                         );
                         return <li key={idx}>{linkWrapper ? linkWrapper(content) : content}</li>;

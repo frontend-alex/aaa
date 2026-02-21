@@ -164,7 +164,7 @@ function LandingHeader() {
                         </RevealWrapper>
                     </div>
 
-                    <div className="small-text text-white">
+                    <div className="small-text text-white uppercase">
                         <RevealWrapper>(scroll down)</RevealWrapper>
                     </div>
                 </div>

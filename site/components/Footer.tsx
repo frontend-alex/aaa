@@ -2,14 +2,19 @@
 
 import Image from "next/image"
 
-import { MediumText, Section, SmallText } from "@/components/components"
 import { OFFICE_HOURS } from "@/constants/data"
+
 import { Button } from "@/custom/button"
-import { SlidingText } from "@/custom/text/sliding-text"
 import { Text } from "@/custom/text/text"
+import { SlidingText } from "@/custom/text/sliding-text"
+
+import { MediumText, Section, SmallText } from "@/components/components"
+
 import { format, toZonedTime } from "date-fns-tz"
 import { useEffect, useState } from "react"
 import { ContactSheet } from "./ContactSheet"
+
+import { Link } from "next-transition-router"
 
 function Footer() {
     const [timeString, setTimeString] = useState<string>("")
@@ -107,11 +112,13 @@ function Footer() {
                         Instagram
                     </SlidingText>
                 </SmallText>
-                <SlidingText>
-                    <SmallText link className="hidden lg:flex">
-                        Site by AIVANOV
-                    </SmallText>
-                </SlidingText>
+                <Link href="https://aiivanov.dev" target="_blank">
+                    <SlidingText>
+                        <SmallText link className="hidden lg:flex">
+                            Site by AIVANOV
+                        </SmallText>
+                    </SlidingText>
+                </Link>
             </div>
 
             <Image src="/svgs/footer-bg.svg" alt="footer background" className="hidden lg:flex w-full h-full object-cover" width={100} height={100} />

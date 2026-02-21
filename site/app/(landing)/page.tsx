@@ -8,7 +8,7 @@ import { ScrollImage } from "@/custom/scroll-image";
 import { Button } from "@/components/custom/button";
 import { useCallback, useEffect, useRef } from "react";
 
-import { LandingHeader } from "@/components/landing/landing-header";
+import { LandingHeader } from "@/components/pages/landing/landing-header";
 import { usePreloader } from "@/components/providers/preloader-context";
 
 
@@ -185,9 +185,9 @@ export default function Page() {
             ))}
           </div>
 
-          <div className="flex flex-col gap-10 w-full">
+          <div className="flex flex-col gap-10 max-w-4xl w-full">
             <Text>
-              <MediumText className="font-bold leading-[1.2]">
+              <MediumText className="font-bold leading-[1.2] indent-20">
                 Our approach at AAA Architecture
                 is designed to make your journey
                 from concept to completion as
@@ -199,11 +199,15 @@ export default function Page() {
               <MediumText className="font-bold leading-[1.2]">
                 With our 6-stage process, we
                 prioritise clarity, collaboration, and
-                your unique vision. At every step, we&apos;ll
+                your unique vision. At every step, we&apos;
                 keep you informed, inspired, and
                 involved.
               </MediumText>
             </Text>
+
+            <Link href="/process">
+              <Button className="w-max">Our Processes</Button>
+            </Link>
           </div>
         </Section>
         {/* Progress Section */}

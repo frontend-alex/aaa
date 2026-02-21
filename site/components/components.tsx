@@ -33,7 +33,7 @@ function BaseText({ className, children }: CompProp) {
 
 function MediumText({ className, children }: CompProp) {
     return (
-        <p className={cn("text-2xl lg:text-5xl font-medium", className)}>
+        <p className={cn("text-2xl lg:text-5xl font-medium tracking-tighter", className)}>
             {children}
         </p>
     )

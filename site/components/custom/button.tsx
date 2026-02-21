@@ -12,7 +12,7 @@ const customButtonVariants = cva(
     {
         variants: {
             variant: {
-                default: "hover:bg-black hover:dark:bg-white",
+                default: "bg-black dark:bg-white hover:bg-black hover:dark:bg-white",
                 outline: "hover:bg-none",
                 secondary: "hover:bg-none",
                 ghost: "hover:bg-transparent",

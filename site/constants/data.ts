@@ -25,25 +25,60 @@ export const OFFICE_HOURS = {
 
 export const PROGRESS_STEPS = [
   {
+    id: "sketch-design",
+    index: "1",
     name: "Sketch Design",
+    title: "Sketch Design",
+    description:
+      "Initial concept exploration through hand-drawn and digital sketches, establishing the project's visual direction, spatial relationships, and architectural intent.",
   },
   {
+    id: "design-development",
+    index: "2",
     name: "Design Development",
+    title: "Design Development",
+    description:
+      "Refining the approved concept into detailed plans with defined materials, structural systems, and technical specifications that guide the project forward.",
   },
   {
+    id: "development-application",
+    index: "3",
     name: "Development Application",
+    title: "Development Application",
+    description:
+      "Preparing and submitting all required documentation to regulatory authorities, ensuring compliance with zoning, building codes, and environmental standards.",
   },
   {
+    id: "interior-design",
+    index: "4",
     name: "Interior Design",
+    title: "Interior Design",
+    description:
+      "Crafting the interior spaces with thoughtful selection of finishes, furnishings, lighting, and layouts that complement the architectural vision and enhance livability.",
   },
   {
+    id: "building-approval",
+    index: "5",
     name: "Building approval plans + documentation",
+    title: "Building Approval",
+    description:
+      "Producing comprehensive technical drawings and supporting documents required for building permit approval, covering structural, mechanical, and safety requirements.",
   },
   {
+    id: "construction-phase",
+    index: "6",
     name: "Construction Phase",
+    title: "Construction Phase",
+    description:
+      "On-site execution of the design with continuous quality oversight, coordinating contractors, managing timelines, and resolving challenges to bring the vision to life.",
   },
   {
+    id: "construction-plans",
+    index: "7",
     name: "Construction plans + documentation",
+    title: "Construction Plans",
+    description:
+      "Delivering final as-built documentation, detailed construction drawings, and project records that serve as a complete reference for the finished build.",
   },
 ];
 
