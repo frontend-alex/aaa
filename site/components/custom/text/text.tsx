@@ -13,26 +13,30 @@ type CopyProps = {
     children: React.ReactNode;
     animateOnScroll?: boolean;
     delay?: number;
-    once?: boolean;
 }
 
-function Text({ children, animateOnScroll = true, delay = 0, once = false }: CopyProps) {
+function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const splitRefs = useRef<SplitText[]>([]);
     const lines = useRef<HTMLElement[]>([]);
     const hasAnimated = useRef(false);
+    const triggerRef = useRef<ScrollTrigger | null>(null);
 
     useGSAP(
         () => {
             if (!containerRef.current) return;
-            if (once && hasAnimated.current) return;
 
+            hasAnimated.current = false;
             splitRefs.current = [];
             lines.current = [];
 
-            hasAnimated.current = true;
-
             const runSplit = () => {
+                // Kill any previous ScrollTrigger we created
+                if (triggerRef.current) {
+                    triggerRef.current.kill();
+                    triggerRef.current = null;
+                }
+
                 const elements = Array.from(containerRef.current!.children) as HTMLElement[];
 
                 elements.forEach((element) => {
@@ -58,6 +62,12 @@ function Text({ children, animateOnScroll = true, delay = 0, once = false }: Cop
                     lines.current.push(...split.lines as HTMLElement[]);
                 });
 
+                // If animation already played, keep text visible
+                if (hasAnimated.current) {
+                    gsap.set(lines.current, { y: "0%" });
+                    return;
+                }
+
                 gsap.set(lines.current, { y: "100%" });
 
                 const animationProps = {
@@ -66,10 +76,13 @@ function Text({ children, animateOnScroll = true, delay = 0, once = false }: Cop
                     stagger: 0.1,
                     ease: "power4.out",
                     delay: delay,
+                    onComplete: () => {
+                        hasAnimated.current = true;
+                    },
                 };
 
                 if (animateOnScroll) {
-                    gsap.to(lines.current, {
+                    const tween = gsap.to(lines.current, {
                         ...animationProps,
                         scrollTrigger: {
                             trigger: containerRef.current,
@@ -77,6 +90,7 @@ function Text({ children, animateOnScroll = true, delay = 0, once = false }: Cop
                             once: true,
                         },
                     });
+                    triggerRef.current = tween.scrollTrigger || null;
                 } else {
                     gsap.to(lines.current, animationProps);
                 }
@@ -94,30 +108,23 @@ function Text({ children, animateOnScroll = true, delay = 0, once = false }: Cop
                 init();
             });
 
-
-            // Handle Resize / Refresh: Revert splits to allow natural reflow, then re-split
-            const onRefreshInit = () => {
-                splitRefs.current.forEach(s => s.revert());
-            };
-
-            const onRefresh = () => {
-                // We need to rebuild the split and animation
-                // But since runSplit creates the animation/ScrollTrigger, we should be careful.
-                // Simpler approach for now: Just revert. ScrollTrigger.refresh() will re-calculate positions.
-                // But SplitText needs to re-split.
-                // Let's just handle this via a dedicated resize listener or trust ScrollTrigger's "invalidateOnRefresh" if we were using it.
-                // Actually, standard pattern is: revert on refreshInit, split on refresh.
-                splitRefs.current = [];
-                lines.current = [];
-                runSplit();
-            };
-
-            ScrollTrigger.addEventListener("refreshInit", onRefreshInit);
-            ScrollTrigger.addEventListener("refresh", onRefresh);
+            // Only re-split on actual container resize (not on image loads)
+            let resizeTimer: ReturnType<typeof setTimeout>;
+            const ro = new ResizeObserver(() => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    splitRefs.current.forEach(s => s.revert());
+                    splitRefs.current = [];
+                    lines.current = [];
+                    runSplit();
+                }, 200);
+            });
+            ro.observe(containerRef.current);
 
             return () => {
-                ScrollTrigger.removeEventListener("refreshInit", onRefreshInit);
-                ScrollTrigger.removeEventListener("refresh", onRefresh);
+                clearTimeout(resizeTimer);
+                ro.disconnect();
+                triggerRef.current?.kill();
                 splitRefs.current.forEach((split) => {
                     if (split) {
                         split.revert();

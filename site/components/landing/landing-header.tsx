@@ -87,7 +87,7 @@ function LandingHeader() {
             <div className="absolute top-0 left-0 w-full z-50">
                 <Navbar
                     logoVariant="light"
-                    className="text-white p-5"
+                    className="text-white"
                     linkWrapper={(node) => (
                         <RevealWrapper className="inline-block">{node}</RevealWrapper>
                     )}

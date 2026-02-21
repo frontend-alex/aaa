@@ -90,7 +90,7 @@ function Navbar({
 
     return (
         <>
-            <div className={cn("flex justify-between items-center", className)}>
+            <div className={cn("flex justify-between items-center p-5", className)}>
                 <Logo variant={logoVariant} />
 
                 <ul className="hidden lg:flex gap-2">

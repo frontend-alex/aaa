@@ -51,7 +51,7 @@ const PageClient = ({ project }: { project: ProjectProps }) => {
     return (
         <main className="flex flex-col justify-between min-h-screen w-full">
             <div className="absolute top-0 left-0 w-full z-50">
-                <Navbar logoVariant="light" className="p-5 text-white" />
+                <Navbar logoVariant="light" className="text-white" />
             </div>
 
             <div ref={headerRef} className="min-h-[150dvh] w-full bg-cover bg-center text-white"
@@ -63,7 +63,7 @@ const PageClient = ({ project }: { project: ProjectProps }) => {
                     style={{ opacity: 0.6 }}
                 />
 
-                <div className="absolute bottom-0 w-full h-1/2">
+                <div className="absolute bottom-0 w-full h-[calc(100dvh-200px)]">
                     <div className="flex flex-col justify-between px-5 pb-5 h-full">
                         <Text animateOnScroll={false}>
                             <BigText className="text-5xl xl:text-[10vw]">

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-transition-router";
 
 import { gsap } from "gsap";
 import { Text } from "@/custom/text/text";
@@ -92,7 +92,9 @@ export default function Page() {
             <Text>
               <p className="text-xl font-medium">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </Text>
-            <Button className="w-max">Learn more about our studio</Button>
+            <Link href={"/studio"}>
+              <Button className="w-max">Learn more about our studio</Button>
+            </Link>
           </div>
 
           <div className="hidden lg:flex items-end gap-5">
@@ -114,7 +116,7 @@ export default function Page() {
 
           <div className="flex flex-col gap-5 lg:gap-50">
             <div className="flex flex-col lg:flex-row gap-5 w-full">
-              <Link href={"#"} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
+              <Link href={`/works/s-tower`} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
                 <ScrollImage src="/images/gallery/image1.png" className="w-full" alt="section-2-1-image" width={1920} height={1080} />
                 <div className="flex flex-col">
                   <SmallText>(01)</SmallText>
@@ -124,7 +126,7 @@ export default function Page() {
                   </SmallText>
                 </div>
               </Link>
-              <Link href={"#"} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full group">
+              <Link href={`/works/nv-towers`} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full group">
                 <div className="order-last lg:order-first flex flex-col">
                   <SmallText>(02)</SmallText>
                   <SmallText>NV TOWER</SmallText>
@@ -138,7 +140,7 @@ export default function Page() {
 
             <div className="flex flex-col gap-5 lg:gap-20 w-full">
               <div className="w-full">
-                <Link href={"#"} className="flex flex-col lg:flex-row gap-3 lg:w-max group h-max">
+                <Link href={`/works/adora-3`} className="flex flex-col lg:flex-row gap-3 lg:w-max group h-max">
                   <ScrollImage src="/images/gallery/image3.png" className="w-full xl:w-[1000px] xl:h-[500px]" imageClassName="object-cover" alt="section-2-1-image" width={1000} height={500} />
                   <div className="flex flex-col">
                     <SmallText>(03)</SmallText>
@@ -150,7 +152,7 @@ export default function Page() {
                 </Link>
               </div>
               <div className="w-full flex lg:justify-center">
-                <Link href={"#"} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full lg:w-max group">
+                <Link href={`/works/summer-villa-r1`} className="flex flex-col lg:flex-row lg:items-end gap-3 w-full lg:w-max group">
                   <ScrollImage src="/images/gallery/image4.png" className="h-[500px]" imageClassName="object-cover lg:object-contain" alt="section-1-image" width={1000} height={500} />
                   <div className="flex flex-col">
                     <SmallText>(04)</SmallText>
@@ -163,7 +165,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex flex-col lg:flex-row gap-5 w-full">
-              <Link href={"#"} className="flex flex-col lg:flex-row  gap-3 w-full group">
+              <Link href={`/works/amari-residence`} className="flex flex-col lg:flex-row  gap-3 w-full group">
                 <ScrollImage src="/images/gallery/image5.jpg" className="w-full" alt="section-1-image" width={1920} height={1080} />
                 <div className="flex flex-col">
                   <SmallText>(05)</SmallText>
@@ -174,7 +176,7 @@ export default function Page() {
                 </div>
               </Link>
 
-              <Link href={"#"} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
+              <Link href={`/works/desizo-monni-administrative-building`} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
                 <div className="order-last lg:order-first flex flex-col">
                   <SmallText>(06)</SmallText>
                   <SmallText>Desizo Monni Administrative Building</SmallText>
@@ -187,7 +189,9 @@ export default function Page() {
             </div>
           </div>
 
-          <Button className="w-max mx-auto">View All projects</Button>
+          <Link href={"/works"}>
+            <Button className="w-max mx-auto">View All projects</Button>
+          </Link>
         </Section>
 
 

@@ -16,7 +16,7 @@ export default function InProgressPage() {
         <main
             className="flex flex-col justify-between lg:max-h-screen min-h-screen"
         >
-            <Navbar className="p-5 order-first" />
+            <Navbar className="order-first" />
 
             <HorizontalScroll
                 items={projectsData}

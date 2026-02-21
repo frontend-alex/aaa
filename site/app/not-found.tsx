@@ -13,7 +13,7 @@ export default function NotFound() {
     return (
         <Section className="overflow-hidden justify-between">
             <div className="flex flex-col gap-10">
-                <Navbar />
+                <Navbar className="p-0" />
                 <Text animateOnScroll={false}>
                     <BigText className="md:text-[15vw] lg:text-[20vw] xl:text-[27vw]">Oops...</BigText>
                 </Text>

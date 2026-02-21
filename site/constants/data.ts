@@ -109,7 +109,7 @@ export const projectsData: ProjectProps[] = [
     src: "/images/gallery/image5.jpg",
   },
   {
-    title: "Desizo Monni Administrative Building",
+    title: "Desizo Monni Building",
     category: "Architecture",
     year: "2018",
     images: [],
