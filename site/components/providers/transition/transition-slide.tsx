@@ -12,7 +12,7 @@ function TransitionSlide({ children }: { children: React.ReactNode }) {
         <TransitionRouter
             auto={true}
             leave={(next, _from, _to) => {
-
+                window.scrollTo(0, 0);
                 const tl = gsap
                     .timeline({
                         onComplete: next,
@@ -44,6 +44,7 @@ function TransitionSlide({ children }: { children: React.ReactNode }) {
                 };
             }}
             enter={(next) => {
+                window.scrollTo(0, 0);
                 const tl = gsap
                     .timeline()
                     .fromTo(

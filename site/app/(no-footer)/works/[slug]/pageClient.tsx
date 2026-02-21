@@ -93,7 +93,12 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                         <Text animateOnScroll={false}>
                             <BigText className="text-5xl xl:text-[10vw]">
                                 {project?.title.includes(' ')
-                                    ? <>{project.title.split(' ')[0]}<br />{project.title.split(' ').slice(1).join(' ')}</>
+                                    ? (() => {
+                                        const [first, ...rest] = project.title.split(' ');
+                                        const remainder = rest.join(' ');
+                                        const startsWithNumber = /^\d/.test(rest[0]);
+                                        return <>{first}{startsWithNumber ? ' ' : <br />}{remainder}</>;
+                                    })()
                                     : project?.title
                                 }
                             </BigText>

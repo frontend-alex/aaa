@@ -27,7 +27,7 @@ function TransitionFade({ children }: { children: React.ReactNode }) {
             }}
             enter={(next) => {
                 const tl = gsap.timeline();
-
+                window.scrollTo(0, 0);
                 tl.fromTo(
                     wrapperRef.current,
                     { opacity: 0 },

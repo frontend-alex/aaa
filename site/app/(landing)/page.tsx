@@ -52,29 +52,6 @@ export default function Page() {
       <LandingHeader />
 
       <div className="flex flex-col gap-30">
-
-        {/* Variant 1 About section*/}
-        {/* <Section className="relative">
-          <BigText className="hidden lg:flex">
-            Experience <br />
-            focused design
-          </BigText>
-
-          <div className="flex flex-col gap-5 max-w-lg mx-auto">
-            <SmallText className="lg:absolute lg:right-5 lg:top-[60%]">(Our Studio)</SmallText>
-            <ScrollImage src="/images/sec1.jpg" className="mx-auto hidden lg:flex" alt="section-1-image" width={1920} height={1080} />
-            <Copy>
-              <p className="text-xl font-medium">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            </Copy>
-            <Copy>
-              <p className="text-xl font-medium">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            </Copy>
-            <Button className="w-max">Learn more about our studio</Button>
-          </div>
-        </Section> */}
-        {/* Variant 1 About Section*/}
-
-
         {/* Variant 2 About section */}
         <Section className="relative lg:gap-20">
           <div className="flex flex-col gap-5">
@@ -176,7 +153,7 @@ export default function Page() {
                 </div>
               </Link>
 
-              <Link href={`/works/desizo-monni-administrative-building`} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
+              <Link href={`/works/desizo-monni-building`} className="flex flex-col lg:flex-row gap-3 w-full group h-max">
                 <div className="order-last lg:order-first flex flex-col">
                   <SmallText>(06)</SmallText>
                   <SmallText>Desizo Monni Administrative Building</SmallText>
