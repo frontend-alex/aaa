@@ -2,7 +2,10 @@
 
 import { useRef, startTransition } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TransitionRouter } from "next-transition-router";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function TransitionFade({ children }: { children: React.ReactNode }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -26,8 +29,8 @@ function TransitionFade({ children }: { children: React.ReactNode }) {
                 };
             }}
             enter={(next) => {
-                const tl = gsap.timeline();
                 window.scrollTo(0, 0);
+                const tl = gsap.timeline();
                 tl.fromTo(
                     wrapperRef.current,
                     { opacity: 0 },

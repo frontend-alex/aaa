@@ -13,7 +13,7 @@ export default function ProcessPage() {
 
     return (
         <>
-            <Section className="gap-10">
+            <Section className="gap-20">
                 <div className="flex flex-col lg:flex-row gap-3 lg:gap-10">
                     <div className="flex-[0.5] lg:flex-[2] flex-[1] relative z-10">
                         <Text>

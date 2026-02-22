@@ -16,6 +16,7 @@ import { PROGRESS_STEPS } from "@/constants/data";
 import { SlidingText } from "@/components/custom/text/sliding-text";
 import { BaseText, BigText, MediumText, Section, SlidingButton, SmallText } from "@/components/components";
 import { Footer } from "@/components/Footer";
+import { LandingHeaderTwo } from "@/components/pages/landing/landing-header-2";
 
 
 export default function Page() {
@@ -49,7 +50,7 @@ export default function Page() {
 
   return (
     <div ref={pageWrapperRef} className="flex flex-col min-h-screen gap-10 w-full">
-      <LandingHeader />
+      <LandingHeaderTwo />
 
       <div className="flex flex-col gap-30">
         {/* Variant 2 About section */}

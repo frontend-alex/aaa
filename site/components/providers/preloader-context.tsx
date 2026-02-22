@@ -31,7 +31,7 @@ function hasShownPreloader() {
 }
 
 function PreloaderProvider({ children }: { children: React.ReactNode }) {
-    const shouldSkip = !isProd || hasShownPreloader();
+    const shouldSkip = true || !isProd || hasShownPreloader();
 
     const [completed, setCompleted] = useState(shouldSkip);
     const callbacksRef = useRef<Set<() => void>>(new Set());
