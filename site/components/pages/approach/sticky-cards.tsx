@@ -2,7 +2,8 @@
 
 import gsap from "gsap";
 
-import { useEffect } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { BigText, MediumText } from "@/components/components";
@@ -11,15 +12,20 @@ import { PROGRESS_STEPS } from "@/constants/data";
 
 import Image from "next/image";
 
-function StickyCards() {
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-        const stickyCards = gsap.utils.toArray<HTMLElement>(".sticky-card");
+function StickyCards() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const triggersRef = useRef<ScrollTrigger[]>([]);
+
+    useGSAP(() => {
+        if (!containerRef.current) return;
+
+        const stickyCards = gsap.utils.toArray<HTMLElement>(".sticky-card", containerRef.current);
 
         stickyCards.forEach((card, index) => {
             if (index < stickyCards.length - 1) {
-                ScrollTrigger.create({
+                const pinTrigger = ScrollTrigger.create({
                     trigger: card,
                     start: "top top",
                     endTrigger: stickyCards[stickyCards.length - 1],
@@ -27,12 +33,13 @@ function StickyCards() {
                     pin: true,
                     pinSpacing: false,
                 });
+                triggersRef.current.push(pinTrigger);
             }
 
             if (index < stickyCards.length - 1) {
                 const overlay = card.querySelector(".card-overlay");
 
-                ScrollTrigger.create({
+                const animTrigger = ScrollTrigger.create({
                     trigger: stickyCards[index + 1],
                     start: "top bottom",
                     end: "top top",
@@ -53,16 +60,27 @@ function StickyCards() {
                         }
                     },
                 });
+                triggersRef.current.push(animTrigger);
             }
         });
 
+        // After client-side navigation, layout isn't settled when useGSAP fires.
+        // Double-rAF ensures we refresh after the browser has painted.
+        let rafId = requestAnimationFrame(() => {
+            rafId = requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
+        });
+
         return () => {
-            ScrollTrigger.getAll().forEach((st) => st.kill());
+            cancelAnimationFrame(rafId);
+            triggersRef.current.forEach((t) => t.kill());
+            triggersRef.current = [];
         };
-    }, []);
+    }, { scope: containerRef });
 
     return (
-        <section className="p-0">
+        <section ref={containerRef} className="p-0">
             {PROGRESS_STEPS.map((cardData, index) => (
                 <div
                     className={`hidden lg:flex sticky-card relative w-full h-screen bg-background ${index > 0 ? "[box-shadow:0_-60px_60px_-60px_rgba(0,0,0,0.1)]" : ""
