@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import LenisProvider from "@/components/providers/lenis-provider";
 
 import { PreloaderProvider } from "@/components/providers/preloader-context";
+import { Analytics } from "@vercel/analytics/next"
 
 import type { Metadata } from "next";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
               <main className="flex flex-col justify-between min-h-screen w-full">
                 {children}
               </main>
+              <Analytics />
             </PreloaderProvider>
           </LenisProvider>
         </TransitionFade>

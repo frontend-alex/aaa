@@ -49,7 +49,7 @@ function Footer() {
     }, [])
 
     return (
-        <Section className="z-20 p-0 gap-0">
+        <Section className="z-20 p-0 gap-0 bg-white dark:bg-black">
             <div className="flex flex-col lg:flex-row justify-between gap-10 border-t border-neutral-200 min-h-[50dvh] py-10 px-5">
                 <div className="flex flex-col gap-10">
                     <Text>

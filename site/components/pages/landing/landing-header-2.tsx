@@ -34,7 +34,7 @@ function LandingHeaderTwo() {
         // 1. Background image reveals with clip-path wipe top → bottom
         tl.to(bgImageRef.current, {
             clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            duration: 1.8,
+            duration: 1.2,
             ease: "power4.inOut",
         });
 
@@ -44,8 +44,8 @@ function LandingHeaderTwo() {
             y: 0,
             duration: 1,
             ease: "power3.out",
-            stagger: 0.15,
-        }, "+=1.2");
+            stagger: 0.5,
+        }, "+=0.5");
 
         // --- Scroll-driven overlay darkening ---
         const overlayTrigger = ScrollTrigger.create({

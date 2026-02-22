@@ -152,3 +152,94 @@ export const projectsData: ProjectProps[] = [
     src: "/images/gallery/image6.jpg",
   },
 ];
+
+export const TEAM = [
+  {
+    name: "Angel Zahariev",
+    image: "/images/team/angel.jpg",
+    position: "Founder & Manager",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Asen Milev",
+    image: "/images/team/asen-milev.jpg",
+    position: "Founder & Manager",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Lili Petrova",
+    image: "/images/team/lili-petrova.jpg",
+    position: "Senior Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Siyka Mitova",
+    image: "/images/team/siyka-mitova.jpg",
+    position: "Project Leader",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Boryana Kalenva",
+    image: "/images/team/boryana-kalenva.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Marina Vasileva",
+    image: "/images/team/marina-vasileva.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Yuliyana Markova",
+    image: "/images/team/yuliyana-markova.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Boryana Dimova",
+    image: "/images/team/boryana-dimova.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Maxim Bakarzhy",
+    image: "/images/team/maxim-bakarzhy.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Gancho Ganchev",
+    image: "/images/team/gancho-ganchev.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+  {
+    name: "Mustafa Mayrulov",
+    image: "/images/team/mustafa-mayrulov.jpg",
+    position: "Architect",
+    additionalInformation: {
+      bio: "",
+    },
+  },
+];
