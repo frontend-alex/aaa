@@ -18,7 +18,7 @@ export function CookieConsent() {
             const timer = setTimeout(() => {
                 setIsVisible(true);
                 setScrollEnabled(false);
-            }, 1000);
+            }, 5000);
             return () => clearTimeout(timer);
         }
     }, []);
