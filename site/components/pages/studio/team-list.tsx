@@ -1,25 +1,20 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { MediumText, SmallText } from "@/components/components";
+import { slugify } from "@/lib/utils";
 import { TEAM } from "@/constants/data";
 import { Link } from "@/components/custom/link";
 import { useTranslate } from "@/hooks/useTranslate";
-
-// Pre-generate a unique rotation for each team member
-const ROTATIONS = TEAM.map((_, i) => {
-    const angles = [-8, 5, -4, 7, -6, 3, -5, 8, -3, 6, -7];
-    return angles[i % angles.length];
-});
+import { useRef, useState, useCallback } from "react";
+import { MediumText, SmallText } from "@/components/components";
 
 function TeamList() {
     const { t } = useTranslate();
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
     const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-    const [activeIndex, setActiveIndex] = useState(0); // default to first member
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const getYForRow = useCallback((index: number) => {
         if (!imageRef.current || !containerRef.current) return 0;
@@ -28,7 +23,6 @@ function TeamList() {
         const containerRect = containerRef.current.getBoundingClientRect();
         const rowRect = row.getBoundingClientRect();
         const imageHeight = imageRef.current.offsetHeight;
-        // Bottom of image = bottom of row
         return rowRect.top - containerRect.top + rowRect.height - imageHeight;
     }, []);
 
@@ -38,7 +32,6 @@ function TeamList() {
         gsap.to(imageRef.current, {
             y: getYForRow(index),
             xPercent: -50,
-            // rotation: ROTATIONS[index],
             scale: 1,
             opacity: 1,
             duration: 0.5,
@@ -51,7 +44,6 @@ function TeamList() {
         setActiveIndex(index);
         animateImage(index);
 
-        // Dim non-active rows
         if (containerRef.current) {
             const rows = containerRef.current.querySelectorAll(".team-row");
             rows.forEach((row, i) => {
@@ -67,19 +59,16 @@ function TeamList() {
     const handleContainerLeave = useCallback(() => {
         setActiveIndex(0);
 
-        // Animate back to first row position
         if (imageRef.current && rowRefs.current[0] && containerRef.current) {
             gsap.to(imageRef.current, {
                 y: getYForRow(0),
                 xPercent: -50,
-                // rotation: ROTATIONS[0],
                 duration: 0.5,
                 ease: "power3.out",
                 overwrite: true,
             });
         }
 
-        // Reset all rows to full opacity
         if (containerRef.current) {
             const rows = containerRef.current.querySelectorAll(".team-row");
             rows.forEach((row) => {
@@ -121,16 +110,16 @@ function TeamList() {
                 {/* Team rows */}
                 {TEAM.map((member, index) => (
                     <Link
-                        href={`/studio/${member.name}`}
+                        href={`/studio/${slugify(member.name)}`}
                         key={member.name}
                         ref={(el) => { rowRefs.current[index] = el; }}
-                        className="team-row w-full cursor-pointer py-4"
+                        className="team-row w-full cursor-pointer py-2"
                         style={{ opacity: activeIndex === index ? 1 : 0.3 }}
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
                         <div className="flex justify-center items-center gap-5 w-full">
-                            <MediumText className="uppercase font-bold">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
                             <SmallText className="uppercase">{t(`team.position.${member.position}` as any)}</SmallText>
+                            <MediumText className="uppercase font-bold xl:text-6xl">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
                         </div>
                     </Link>
                 ))}

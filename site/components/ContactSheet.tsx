@@ -77,7 +77,7 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                         {/* Panel */}
                         <div
                             className={cn(
-                                "contact-overlay font-medium uppercase fixed top-0 right-0 h-full w-[400px] lg:w-[600px] p-5 bg-white z-[1000] overflow-y-auto",
+                                "contact-overlay font-medium uppercase fixed top-0 right-0 h-full w-full lg:w-[600px] p-5 bg-white z-[1000] overflow-y-auto",
                                 "transition-[clip-path] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]",
                                 isOpen
                                     ? "pointer-events-auto [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%)]"
