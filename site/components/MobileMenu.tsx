@@ -13,6 +13,7 @@ import { Logo } from "./Navbar";
 import { Link } from "@/components/custom/link";
 import { SlidingText } from "@/custom/text/sliding-text";
 import { useTranslate } from "@/hooks/useTranslate";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface MobileMenuProps {
     variant?: VariantProps<typeof buttonVariants>["variant"];
@@ -160,6 +161,7 @@ function MobileMenu({
                                 </SlidingText>
                             </div>
                         </div>
+                        <LanguageSwitcher />
                     </div>,
                     document.body
                 )}

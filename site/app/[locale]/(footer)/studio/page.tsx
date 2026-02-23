@@ -75,7 +75,7 @@ export default function StudioPage() {
                         </p>
                     </Text>
                 </div>
-                <ScrollImage src="/images/team/3.jpg" className="w-full" alt="section-1-image" width={1920} height={1080} />
+                <ScrollImage src="/images/team/3.jpg" className="w-full hidden lg:block" alt="section-1-image" width={1920} height={1080} />
             </div>
             <AwardsList />
         </Section>
