@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
 
 import { gsap } from "gsap";
 import { Text } from "@/custom/text/text";
@@ -14,13 +14,15 @@ import { usePreloader } from "@/components/providers/preloader-context";
 
 import { PROGRESS_STEPS } from "@/constants/data";
 import { SlidingText } from "@/components/custom/text/sliding-text";
-import { BaseText, BigText, MediumText, Section, SlidingButton, SmallText } from "@/components/components";
+import { MediumText, Section, SlidingButton, SmallText, BigText, BaseText } from "@/components/components";
 import { Footer } from "@/components/Footer";
 import { LandingHeaderTwo } from "@/components/pages/landing/landing-header-2";
+import { useTranslate } from "@/hooks/useTranslate";
 
 
 export default function Page() {
   const pageWrapperRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslate();
 
   const { registerOnComplete } = usePreloader();
 
@@ -56,22 +58,22 @@ export default function Page() {
         {/* Variant 2 About section */}
         <Section className="relative lg:gap-20">
           <div className="flex flex-col gap-5">
-            <SmallText>(Our Studio)</SmallText>
+            <SmallText>{t("landing.about.title")}</SmallText>
             <BigText className="hidden lg:flex">
-              Experience <br />
-              focused design
+              {t("landing.about.heading1")} <br />
+              {t("landing.about.heading2")}
             </BigText>
           </div>
 
           <div className="flex flex-col ml-auto gap-5 max-w-2xl">
             <Text>
-              <p className="text-xl font-medium">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+              <p className="text-xl font-medium">{t("landing.about.p1")}</p>
             </Text>
             <Text>
-              <p className="text-xl font-medium">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <p className="text-xl font-medium">{t("landing.about.p2")}</p>
             </Text>
             <Link href={"/studio"}>
-              <Button className="w-max">Learn more about our studio</Button>
+              <Button className="w-max">{t("landing.about.btn")}</Button>
             </Link>
           </div>
 
@@ -87,7 +89,7 @@ export default function Page() {
         <Section className="lg:gap-20">
           <div className="flex items-center justify-between gap-5">
             <BigText>
-              featured <br /> Works
+              {t("landing.works.title1")} <br /> {t("landing.works.title2")}
             </BigText>
             <BigText>(06)</BigText>
           </div>
@@ -100,7 +102,7 @@ export default function Page() {
                   <SmallText>(01)</SmallText>
                   <SmallText>S Tower</SmallText>
                   <SmallText>
-                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>Present</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>{t("landing.works.present")}</SlidingText>
                   </SmallText>
                 </div>
               </Link>
@@ -109,7 +111,7 @@ export default function Page() {
                   <SmallText>(02)</SmallText>
                   <SmallText>NV TOWER</SmallText>
                   <SmallText>
-                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2021</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>2021</SlidingText>
                   </SmallText>
                 </div>
                 <ScrollImage src="/images/gallery/image2.png" className="w-full" alt="section-1-image" width={1920} height={1080} />
@@ -124,7 +126,7 @@ export default function Page() {
                     <SmallText>(03)</SmallText>
                     <SmallText>Adora 3</SmallText>
                     <SmallText>
-                      <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2021</SlidingText>
+                      <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>2021</SlidingText>
                     </SmallText>
                   </div>
                 </Link>
@@ -136,7 +138,7 @@ export default function Page() {
                     <SmallText>(04)</SmallText>
                     <SmallText>Summer villa R1</SmallText>
                     <SmallText>
-                      <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2020</SlidingText>
+                      <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>2020</SlidingText>
                     </SmallText>
                   </div>
                 </Link>
@@ -149,7 +151,7 @@ export default function Page() {
                   <SmallText>(05)</SmallText>
                   <SmallText>Amari Residence</SmallText>
                   <SmallText>
-                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2023</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>2023</SlidingText>
                   </SmallText>
                 </div>
               </Link>
@@ -159,7 +161,7 @@ export default function Page() {
                   <SmallText>(06)</SmallText>
                   <SmallText>Desizo Monni Administrative Building</SmallText>
                   <SmallText>
-                    <SlidingText hoverText={<SlidingButton>View Project</SlidingButton>}>2018</SlidingText>
+                    <SlidingText hoverText={<SlidingButton>{t("landing.view_project")}</SlidingButton>}>2018</SlidingText>
                   </SmallText>
                 </div>
                 <ScrollImage src="/images/gallery/image6.jpg" className="w-full" alt="section-2-1-image" width={1920} height={1080} />
@@ -168,7 +170,7 @@ export default function Page() {
           </div>
 
           <Link href={"/works"}>
-            <Button className="w-max mx-auto">View All projects</Button>
+            <Button className="w-max mx-auto">{t("landing.works.all")}</Button>
           </Link>
         </Section>
 
@@ -176,12 +178,12 @@ export default function Page() {
         {/* Progress Section */}
         <Section className="flex flex-col lg:flex-row gap-20 justify-start">
           <div className="flex flex-col gap-3">
-            <SmallText>(progress)</SmallText>
+            <SmallText>{t("landing.progress.title")}</SmallText>
             <ScrollImage src="/images/section2/image1.jpg" className="max-w-2xl" alt="Muzeiko image" width={1920} height={1080} imageClassName="object-cover" />
             {PROGRESS_STEPS.map((step, idnex) => (
               <div key={idnex} className="flex items-center gap-2 border-b-2 border-neutral-200 pb-1">
                 <BaseText className="text-stone-400">(0{idnex + 1})</BaseText>
-                <BaseText>{step.name}</BaseText>
+                <BaseText>{t(`process.steps.${step.id}.name` as any)}</BaseText>
               </div>
             ))}
           </div>
@@ -189,25 +191,18 @@ export default function Page() {
           <div className="flex flex-col gap-10 max-w-4xl w-full">
             <Text>
               <MediumText className="font-bold leading-[1.2] indent-20">
-                Our approach at AAA Architecture
-                is designed to make your journey
-                from concept to completion as
-                smooth and enjoyable as possible.
+                {t("landing.progress.p1")}
               </MediumText>
             </Text>
 
             <Text>
               <MediumText className="font-bold leading-[1.2]">
-                With our 6-stage process, we
-                prioritise clarity, collaboration, and
-                your unique vision. At every step, we&apos;
-                keep you informed, inspired, and
-                involved.
+                {t("landing.progress.p2")}
               </MediumText>
             </Text>
 
             <Link href="/process">
-              <Button className="w-max">Our Processes</Button>
+              <Button className="w-max">{t("landing.progress.btn")}</Button>
             </Link>
           </div>
         </Section>

@@ -6,10 +6,12 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Text } from "@/components/custom/text/text";
 import { MediumText, SmallText } from "@/components/components";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function StudioLanding() {
+    const { t } = useTranslate();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLElement>(null);
@@ -52,25 +54,25 @@ function StudioLanding() {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="flex flex-col lg:gap-10 xl:h-screen bg-white">
+        <div ref={containerRef} className="flex flex-col lg:gap-10 justify-between">
             <div className="flex flex-col justify-end xl:h-1/3">
                 <div
-                    className="flex flex-col gap-5"
+                    className="flex justify-between items-end gap-5"
                 >
                     <Text delay={1.7}>
-                        <SmallText className="uppercase">(About us)</SmallText>
+                        <MediumText className="hidden lg:block lg:text-4xl xl:text-5xl leading-[1.2] font-bold max-w-7xl">
+                            {t("studio.desc")}
+                        </MediumText>
                     </Text>
                     <Text delay={1.7}>
-                        <MediumText className="lg:text-4xl xl:text-5xl leading-[1.2] font-bold max-w-7xl">
-                            In their work, A&A Architects strive to create a strong link between theory and practice, expressed in the search for an optimal balance between aesthetic, functional, economic and environmental characteristics of each building designed by the studio.
-                        </MediumText>
+                        <SmallText className="uppercase">{t("studio.about")}</SmallText>
                     </Text>
                 </div>
 
             </div>
             <header
                 ref={headerRef}
-                className="h-[150px] lg:h-2/3 relative">
+                className="h-[200px] lg:h-[60dvh] relative">
                 <div
                     ref={bgImageRef}
                     className="h-full bg-[url('/images/studio/bg.jpg')] bg-contain lg:bg-cover bg-no-repeat bg-white bg-bottom"
@@ -81,6 +83,11 @@ function StudioLanding() {
                     style={{ opacity: 0, zIndex: 2 }}
                 />
             </header>
+            <Text delay={1.7}>
+                <p className="lg:hidden text-xl font-medium mt-10">
+                    {t("studio.desc")}
+                </p>
+            </Text>
         </div>
     )
 }

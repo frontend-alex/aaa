@@ -10,9 +10,9 @@ import { type VariantProps } from "class-variance-authority";
 import { buttonVariants } from "@/components/ui/button";
 import { setScrollEnabled } from "@/lib/lenis";
 import { Logo } from "./Navbar";
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
 import { SlidingText } from "@/custom/text/sliding-text";
-import { ContactSheet } from "./ContactSheet";
+import { useTranslate } from "@/hooks/useTranslate";
 
 interface MobileMenuProps {
     variant?: VariantProps<typeof buttonVariants>["variant"];
@@ -26,6 +26,7 @@ function MobileMenu({
     buttonClassname,
 }: MobileMenuProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { t } = useTranslate();
 
     const isMounted = typeof window !== "undefined";
 
@@ -50,7 +51,7 @@ function MobileMenu({
                     variant={variant}
                     className={buttonClassname}
                 >
-                    Menu
+                    {t("menu.button")}
                 </Button>
             </div>
 
@@ -73,7 +74,7 @@ function MobileMenu({
                                 variant="ghost"
                                 className="p-0 hover:text-white text-sm font-semibold"
                             >
-                                Close
+                                {t("menu.close")}
                             </Button>
                         </div>
 
@@ -97,7 +98,7 @@ function MobileMenu({
                                         }}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
-                                        {link.name}
+                                        {t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as any) || link.name}
                                     </Link>
                                 </SlidingText>
                             ))}
@@ -118,7 +119,7 @@ function MobileMenu({
                                             : "0ms"
                                     }}
                                 >
-                                    Instagram
+                                    {t("menu.instagram")}
                                 </Link>
                             </SlidingText>
 
@@ -137,7 +138,7 @@ function MobileMenu({
                                                 : "0ms"
                                         }}
                                     >
-                                        Privacy Policy
+                                        {t("menu.privacy")}
                                     </Link>
                                 </SlidingText>
                                 <SlidingText>
@@ -154,7 +155,7 @@ function MobileMenu({
                                                 : "0ms"
                                         }}
                                     >
-                                        Terms of Use
+                                        {t("menu.terms")}
                                     </Link>
                                 </SlidingText>
                             </div>

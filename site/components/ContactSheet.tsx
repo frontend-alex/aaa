@@ -19,9 +19,11 @@ import { contactSchema, type ContactSchemaType } from "@/lib/schema.contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Controller, useForm } from "react-hook-form";
+import { useTranslate } from "@/hooks/useTranslate";
 
 function ContactSheet({ children }: { children: React.ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);
+    const { t } = useTranslate();
 
     const isMounted = typeof window !== "undefined";
 
@@ -86,19 +88,19 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                             <div className="flex flex-col gap-10 w-full flex-1 justify-center">
                                 <div className="flex flex-row items-center justify-between">
                                     <MediumText className="lg:text-4xl normal-case">
-                                        Let&apos;s start something great
+                                        {t("contact.title")}
                                     </MediumText>
                                     <Button
                                         onClick={() => setIsOpen(false)}
                                         variant="ghost"
                                         className="p-0 text-sm font-semibold"
                                     >
-                                        Close
+                                        {t("contact.close")}
                                     </Button>
                                 </div>
 
                                 <div className="flex flex-col gap-5">
-                                    <SmallText>(About you)</SmallText>
+                                    <SmallText>{t("contact.about")}</SmallText>
                                     <form
                                         onSubmit={contactForm.handleSubmit(onSubmit)}
                                         className="flex flex-col gap-3 normal-case"
@@ -110,14 +112,14 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                                 render={({ field, fieldState }) => (
                                                     <Field className="gap-2" data-invalid={fieldState.invalid}>
                                                         <FieldLabel htmlFor="contact-firstName">
-                                                            First Name
+                                                            {t("contact.first_name")}
                                                         </FieldLabel>
                                                         <Input
                                                             {...field}
                                                             className="no-ring input"
                                                             id="contact-firstName"
                                                             aria-invalid={fieldState.invalid}
-                                                            placeholder="John"
+                                                            placeholder={t("contact.first_name_ph")}
                                                             autoComplete="off"
                                                         />
                                                         {fieldState.invalid && (
@@ -132,14 +134,14 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                                 render={({ field, fieldState }) => (
                                                     <Field className="gap-2" data-invalid={fieldState.invalid}>
                                                         <FieldLabel htmlFor="contact-lastName">
-                                                            Last Name
+                                                            {t("contact.last_name")}
                                                         </FieldLabel>
                                                         <Input
                                                             className="no-ring input"
                                                             {...field}
                                                             id="contact-lastName"
                                                             aria-invalid={fieldState.invalid}
-                                                            placeholder="Doe"
+                                                            placeholder={t("contact.last_name_ph")}
                                                             autoComplete="off"
                                                         />
                                                         {fieldState.invalid && (
@@ -155,14 +157,14 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                             render={({ field, fieldState }) => (
                                                 <Field className="gap-2" data-invalid={fieldState.invalid}>
                                                     <FieldLabel htmlFor="contact-email">
-                                                        Email
+                                                        {t("contact.email")}
                                                     </FieldLabel>
                                                     <Input
                                                         {...field}
                                                         className="no-ring input"
                                                         id="contact-email"
                                                         aria-invalid={fieldState.invalid}
-                                                        placeholder="example@domain.com"
+                                                        placeholder={t("contact.email_ph")}
                                                         autoComplete="off"
                                                     />
                                                     {fieldState.invalid && (
@@ -177,7 +179,7 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                             render={({ field, fieldState }) => (
                                                 <Field className="gap-2" data-invalid={fieldState.invalid}>
                                                     <FieldLabel htmlFor="contact-message">
-                                                        Message
+                                                        {t("contact.message")}
                                                     </FieldLabel>
                                                     <Textarea
                                                         {...field}
@@ -185,7 +187,7 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                                         id="contact-message"
                                                         aria-invalid={fieldState.invalid}
                                                         autoComplete="off"
-                                                        placeholder="Your message..."
+                                                        placeholder={t("contact.message_ph")}
                                                     />
                                                     {fieldState.invalid && (
                                                         <FieldError errors={[fieldState.error]} />
@@ -194,7 +196,7 @@ function ContactSheet({ children }: { children: React.ReactNode }) {
                                             )}
                                         />
                                         <Button type="submit" className="w-max ml-auto">
-                                            Send message
+                                            {t("contact.send")}
                                         </Button>
                                     </form>
                                 </div>

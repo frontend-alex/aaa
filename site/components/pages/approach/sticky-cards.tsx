@@ -11,10 +11,12 @@ import { BigText, MediumText } from "@/components/components";
 import { PROGRESS_STEPS } from "@/constants/data";
 
 import Image from "next/image";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function StickyCards() {
+    const { t } = useTranslate();
     const containerRef = useRef<HTMLDivElement>(null);
     const triggersRef = useRef<ScrollTrigger[]>([]);
 
@@ -101,7 +103,7 @@ function StickyCards() {
                     <div className="flex-[4] pt-6 relative z-10">
                         <div className="w-full flex flex-col gap-10">
                             <MediumText className="tracking-tighter lg:text-6xl xl:text-7xl font-bold uppercase">
-                                {cardData.title}
+                                {t(`process.steps.${cardData.id}.title` as any)}
                             </MediumText>
 
 
@@ -113,7 +115,7 @@ function StickyCards() {
                                 height={1080}
                             />
                             <p className="max-w-lg text-xl font-medium">
-                                {cardData.description}
+                                {t(`process.steps.${cardData.id}.desc` as any)}
                             </p>
                         </div>
                     </div>
@@ -137,11 +139,11 @@ function StickyCards() {
                             height={1080}
                         />
                         <MediumText className="tracking-tighter lg:text-6xl xl:text-7xl font-bold uppercase">
-                            {cardData.title}
+                            {t(`process.steps.${cardData.id}.title` as any)}
                         </MediumText>
 
                         <p className="max-w-lg text-xl font-medium">
-                            {cardData.description}
+                            {t(`process.steps.${cardData.id}.desc` as any)}
                         </p>
                     </div>
                 </div>

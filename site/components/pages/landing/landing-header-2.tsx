@@ -6,11 +6,13 @@ import { Navbar } from "@/components/Navbar";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function LandingHeaderTwo() {
+    const { t } = useTranslate();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLElement>(null);
@@ -75,16 +77,16 @@ function LandingHeaderTwo() {
                     ref={projectInfoRef}
                     className="flex items-center justify-between uppercase text-sm font-semibold px-5"
                 >
-                    <p>summer villa</p>
+                    <p>{t("landing.summer_villa")}</p>
                     <p>2021</p>
-                    <p className="hidden lg:block">featured project</p>
+                    <p className="hidden lg:block">{t("landing.featured_project")}</p>
 
                     <Link href="/works/summer-vila-r1">
                         <Button
                             circle
                             variant={"ghost"}
                         >
-                            View project
+                            {t("landing.view_project")}
                         </Button>
                     </Link>
                 </div>

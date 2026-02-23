@@ -8,10 +8,12 @@ import { projectsData } from "@/constants/data";
 import { slugify } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
 import { HorizontalScroll } from "@/components/ui/horizontal-scroll";
+import { useTranslate } from "@/hooks/useTranslate";
 
 export default function ArchivePage() {
+    const { t } = useTranslate();
     return (
         <main
             className="flex flex-col justify-between lg:max-h-screen min-h-screen"
@@ -29,7 +31,7 @@ export default function ArchivePage() {
                         className="flex flex-col gap-1 w-full cursor-pointer"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain h-[400px]" width={1000} height={1000} />
-                        <SmallText>{project.title}</SmallText>
+                        <SmallText>{t(`project.title.${project.title}` as any) || project.title}</SmallText>
                     </Link>
                 )}
             />
@@ -42,7 +44,7 @@ export default function ArchivePage() {
                         className="flex flex-col gap-3 w-full h-full"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain w-full" width={1000} height={1000} />
-                        <SmallText>{project.title}</SmallText>
+                        <SmallText>{t(`project.title.${project.title}` as any) || project.title}</SmallText>
                     </Link>
                 ))}
             </Section>
@@ -71,13 +73,13 @@ export default function ArchivePage() {
                         <SlidingText
                             hoverText={
                                 <div className="flex items-center gap-2">
-                                    <SmallText>Works</SmallText>
+                                    <SmallText>{t("works.title")}</SmallText>
                                     <ArrowRight size={12} />
                                 </div>
                             }
                             className="cursor-pointer"
                         >
-                            <SmallText link>Works</SmallText>
+                            <SmallText link>{t("works.title")}</SmallText>
                         </SlidingText>
                     </Link>
 
@@ -85,13 +87,13 @@ export default function ArchivePage() {
                         <SlidingText
                             hoverText={
                                 <div className="flex items-center gap-2">
-                                    <SmallText>In Progress</SmallText>
+                                    <SmallText>{t("works.in_progress")}</SmallText>
                                     <ArrowRight size={12} />
                                 </div>
                             }
                             className="cursor-pointer"
                         >
-                            <SmallText link>In Progress</SmallText>
+                            <SmallText link>{t("works.in_progress")}</SmallText>
                         </SlidingText>
                     </Link>
                 </div>

@@ -5,7 +5,8 @@ import gsap from "gsap";
 import Image from "next/image";
 import { MediumText, SmallText } from "@/components/components";
 import { TEAM } from "@/constants/data";
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
+import { useTranslate } from "@/hooks/useTranslate";
 
 // Pre-generate a unique rotation for each team member
 const ROTATIONS = TEAM.map((_, i) => {
@@ -14,6 +15,7 @@ const ROTATIONS = TEAM.map((_, i) => {
 });
 
 function TeamList() {
+    const { t } = useTranslate();
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
     const rowRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -36,7 +38,7 @@ function TeamList() {
         gsap.to(imageRef.current, {
             y: getYForRow(index),
             xPercent: -50,
-            rotation: ROTATIONS[index],
+            // rotation: ROTATIONS[index],
             scale: 1,
             opacity: 1,
             duration: 0.5,
@@ -70,7 +72,7 @@ function TeamList() {
             gsap.to(imageRef.current, {
                 y: getYForRow(0),
                 xPercent: -50,
-                rotation: ROTATIONS[0],
+                // rotation: ROTATIONS[0],
                 duration: 0.5,
                 ease: "power3.out",
                 overwrite: true,
@@ -94,13 +96,13 @@ function TeamList() {
         <>
             <div
                 ref={containerRef}
-                className="hidden lg:flex flex-col justify-center items-center relative mt-30"
+                className="hidden lg:flex flex-col justify-center items-center relative mt-30 relative"
                 onMouseLeave={handleContainerLeave}
             >
                 {/* Floating image that follows the hovered row */}
                 <div
                     ref={imageRef}
-                    className="pointer-events-none absolute left-1/2 top-0 z-10 w-[200px] h-[260px] lg:w-[250px] lg:h-[320px] overflow-hidden"
+                    className="pointer-events-none absolute right-0 top-5 z-10 w-[200px] h-[260px] lg:w-[250px] lg:h-[320px] overflow-hidden"
 
                 >
                     {TEAM.map((member, index) => (
@@ -110,7 +112,7 @@ function TeamList() {
                             alt={member.name}
                             width={300}
                             height={400}
-                            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+                            className="absolute top-0 inset-0 w-full h-full object-cover transition-opacity duration-300"
                             style={{ opacity: activeIndex === index ? 1 : 0 }}
                         />
                     ))}
@@ -122,13 +124,13 @@ function TeamList() {
                         href={`/studio/${member.name}`}
                         key={member.name}
                         ref={(el) => { rowRefs.current[index] = el; }}
-                        className="team-row w-full cursor-pointer border-b border-neutral-200 py-4"
+                        className="team-row w-full cursor-pointer py-4"
                         style={{ opacity: activeIndex === index ? 1 : 0.3 }}
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
-                        <div className="flex items-center gap-5 w-full">
-                            <MediumText className="uppercase font-bold">{member.name}</MediumText>
-                            <SmallText className="uppercase ml-auto">{member.position}</SmallText>
+                        <div className="flex justify-center items-center gap-5 w-full">
+                            <MediumText className="uppercase font-bold">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
+                            <SmallText className="uppercase">{t(`team.position.${member.position}` as any)}</SmallText>
                         </div>
                     </Link>
                 ))}
@@ -143,8 +145,8 @@ function TeamList() {
                             height={400}
                             className="w-full h-full object-cover shadow-2xl"
                         />
-                        <MediumText className="uppercase">{member.name}</MediumText>
-                        <SmallText className="uppercase -mt-2">{member.position}</SmallText>
+                        <MediumText className="uppercase">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
+                        <SmallText className="uppercase -mt-2">{t(`team.position.${member.position}` as any)}</SmallText>
                     </Link>
                 ))}
             </div>

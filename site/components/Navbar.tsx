@@ -14,8 +14,10 @@ import { NAV_LINKS } from "@/constants/data"
 import { MobileMenu } from "./MobileMenu";
 import { ContactSheet } from "@/components/ContactSheet";
 
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
 import { SlidingText } from "./custom/text/sliding-text";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,6 +60,7 @@ function Navbar({
 }) {
     const stickyButtonsRef = useRef<HTMLDivElement>(null);
     const lastLink = NAV_LINKS[NAV_LINKS.length - 1];
+    const { t } = useTranslate();
 
     // Sticky animation
     useEffect(() => {
@@ -100,7 +103,7 @@ function Navbar({
                                 className="uppercase text-sm font-bold flex items-center"
                                 href={link.href}
                             >
-                                <SlidingText>{link.name}</SlidingText>
+                                <SlidingText>{t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as any) || link.name}</SlidingText>
                                 {/* {link.name !== lastLink.name ? "," : ""} */}
                             </Link>
                         );
@@ -112,18 +115,20 @@ function Navbar({
                     {actionWrapper ? (
                         actionWrapper(
                             <ContactSheet>
-                                <Button className="hidden lg:flex">Get in touch</Button>
+                                <Button className="hidden lg:flex">{t("nav.get_in_touch")}</Button>
                             </ContactSheet>
                         )
                     ) : (
                         <ContactSheet>
-                            <Button className="hidden lg:flex">Get in touch</Button>
+                            <Button className="hidden lg:flex">{t("nav.get_in_touch")}</Button>
                         </ContactSheet>
                     )}
+
 
                     <div className="lg:hidden">
                         <MobileMenu />
                     </div>
+                    <LanguageSwitcher />
                 </div>
             </div>
 
@@ -133,7 +138,7 @@ function Navbar({
                 className="fixed top-5 right-5 z-40 flex items-center gap-3 pointer-events-none opacity-0"
             >
                 <ContactSheet>
-                    <Button>Get in touch</Button>
+                    <Button>{t("nav.get_in_touch")}</Button>
                 </ContactSheet>
                 <MobileMenu />
             </div>

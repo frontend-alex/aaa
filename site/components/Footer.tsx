@@ -14,11 +14,13 @@ import { format, toZonedTime } from "date-fns-tz"
 import { useEffect, useState } from "react"
 import { ContactSheet } from "./ContactSheet"
 
-import { Link } from "next-transition-router"
+import { Link } from "@/components/custom/link";
+import { useTranslate } from "@/hooks/useTranslate"
 
 function Footer() {
     const [timeString, setTimeString] = useState<string>("")
     const [status, setStatus] = useState<string>("")
+    const { t } = useTranslate()
 
     useEffect(() => {
         const updateTime = () => {
@@ -37,9 +39,9 @@ function Footer() {
             const isOpenHour = hour >= OFFICE_HOURS.open && hour < OFFICE_HOURS.close
 
             if (isOpenDay && isOpenHour) {
-                setStatus("we are open")
+                setStatus(t("footer.open") as string)
             } else {
-                setStatus("we are closed")
+                setStatus(t("footer.closed") as string)
             }
         }
 
@@ -54,17 +56,17 @@ function Footer() {
                 <div className="flex flex-col gap-10">
                     <Text>
                         <MediumText className="leading-[1.2] w-full">
-                            Let&apos;s explore how we can <br className="hidden lg:flex" />help you achieve your goals.
+                            {t("footer.heading1")} <br className="hidden lg:flex" />{t("footer.heading2")}
                         </MediumText>
                     </Text>
                     <ContactSheet>
-                        <Button className="w-max">Tell us about your project</Button>
+                        <Button className="w-max">{t("footer.button")}</Button>
                     </ContactSheet>
                 </div>
                 <div className="flex flex-col gap-5">
                     <Text>
                         <SmallText>
-                            (info)
+                            {t("footer.info")}
                         </SmallText>
                     </Text>
 
@@ -82,7 +84,7 @@ function Footer() {
             <div className="border-t border-neutral-200 p-5 flex flex-col gap-10 lg:gap-0 lg:flex-row justify-between lg:items-end content-center">
                 <div className="flex flex-col order-last lg:order-none">
                     <SmallText>
-                        © AAA {new Date().getFullYear()}
+                        {t("footer.rights")} {new Date().getFullYear()}
                     </SmallText>
                     <SmallText className="min-h-[1.5em]">
                         {timeString && status ? `${timeString}, ${status}` : "Loading..."}
@@ -91,31 +93,31 @@ function Footer() {
 
                     <SmallText className="flex lg:hidden mt-5">
                         <SlidingText>
-                            Site by AIVANOV
+                            {t("footer.site_by")}
                         </SlidingText>
                     </SmallText>
                 </div>
                 <div className="flex flex-col">
                     <SmallText>
                         <SlidingText>
-                            Privacy Policy
+                            <Link href="/privacy">{t("footer.privacy")}</Link>
                         </SlidingText>
                     </SmallText>
                     <SmallText >
                         <SlidingText>
-                            Terms & Conditions
+                            {t("footer.terms")}
                         </SlidingText>
                     </SmallText>
                 </div>
                 <SmallText>
                     <SlidingText>
-                        Instagram
+                        {t("footer.instagram")}
                     </SlidingText>
                 </SmallText>
                 <Link href="https://aiivanov.dev" target="_blank">
                     <SlidingText>
-                        <SmallText link className="hidden lg:flex">
-                            Site by AIVANOV
+                        <SmallText link className="hidden lg:flex leading-[1.6]">
+                            {t("footer.site_by")}
                         </SmallText>
                     </SlidingText>
                 </Link>

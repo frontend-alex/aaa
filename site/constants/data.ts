@@ -243,3 +243,49 @@ export const TEAM = [
     },
   },
 ];
+
+export const AWARDS = [
+  { year: "2020", project: "project.title.Building15", award: "award.1" },
+  { year: "2020", project: "project.title.AA_Architects", award: "award.2" },
+  { year: "2019", project: "project.title.Building15", award: "award.3" },
+  { year: "2019", project: "project.title.Building15", award: "award.4" },
+  { year: "2019", project: "project.title.Richhill", award: "award.5" },
+  { year: "2019", project: "project.title.DesizoMonniClub", award: "award.6" },
+  { year: "2019", project: "project.title.DesizoMonniCorp", award: "award.7" },
+  { year: "2018", project: "project.title.CentralStation", award: "award.8" },
+  { year: "2018", project: "project.title.AA_Architects", award: "award.9" },
+  { year: "2018", project: "project.title.Building5", award: "award.10" },
+  {
+    year: "2018",
+    project: "project.title.CapitalFortPodium",
+    award: "award.11",
+  },
+  {
+    year: "2017",
+    project: "project.title.DesizoMonniPleven",
+    award: "award.12",
+  },
+  {
+    year: "2017",
+    project: "project.title.IntegrationCenter",
+    award: "award.13",
+  },
+  { year: "2016-17", project: "project.title.CapitalFort", award: "award.14" },
+  { year: "2016-17", project: "project.title.CapitalFort", award: "award.15" },
+  { year: "2016-17", project: "project.title.CapitalFort", award: "award.16" },
+  { year: "2015", project: "project.title.CapitalFort", award: "award.17" },
+  { year: "2015", project: "project.title.Muzeiko", award: "award.18" },
+  { year: "2015", project: "project.title.AA_Architects", award: "award.19" },
+  { year: "2015", project: "project.title.DimitrovPleven", award: "award.20" },
+  { year: "2014", project: "project.title.Telenor", award: "award.21" },
+  { year: "2014", project: "project.title.CapitalFort", award: "award.22" },
+  { year: "2011", project: "project.title.CapitalFort", award: "award.23" },
+  { year: "2007", project: "project.title.Building5", award: "award.24" },
+  { year: "2007", project: "project.title.AA_Architects", award: "award.25" },
+];
+
+export const PUBLICATIONS: {
+  year: string;
+  publication: string;
+  article: string;
+}[] = [];

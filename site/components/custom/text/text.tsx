@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -22,10 +23,13 @@ function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
     const hasAnimated = useRef(false);
     const triggerRef = useRef<ScrollTrigger | null>(null);
 
+    const { language } = useTranslate();
+
     useGSAP(
         () => {
             if (!containerRef.current) return;
 
+            let isCancelled = false;
             hasAnimated.current = false;
             splitRefs.current = [];
             lines.current = [];
@@ -97,6 +101,7 @@ function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
             };
 
             const init = () => {
+                if (isCancelled) return;
                 splitRefs.current.forEach(s => s.revert());
                 splitRefs.current = [];
                 lines.current = [];
@@ -105,7 +110,7 @@ function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
 
             // Wait for fonts to load before splitting
             document.fonts.ready.then(() => {
-                init();
+                if (!isCancelled) init();
             });
 
             // Only re-split on actual container resize (not on image loads)
@@ -113,15 +118,13 @@ function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
             const ro = new ResizeObserver(() => {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(() => {
-                    splitRefs.current.forEach(s => s.revert());
-                    splitRefs.current = [];
-                    lines.current = [];
-                    runSplit();
+                    if (!isCancelled) init();
                 }, 200);
             });
             ro.observe(containerRef.current);
 
             return () => {
+                isCancelled = true;
                 clearTimeout(resizeTimer);
                 ro.disconnect();
                 triggerRef.current?.kill();
@@ -132,11 +135,11 @@ function Text({ children, animateOnScroll = true, delay = 0 }: CopyProps) {
                 });
             };
         },
-        { scope: containerRef, dependencies: [animateOnScroll, delay] }
+        { scope: containerRef, dependencies: [animateOnScroll, delay, language] }
     );
 
     return (
-        <div ref={containerRef} data-copy-wrapper="true">
+        <div ref={containerRef} key={language} data-copy-wrapper="true">
             {children}
         </div>
     );

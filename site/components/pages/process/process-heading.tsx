@@ -6,10 +6,12 @@ import { MediumText, SmallText } from "@/components/components";
 
 import gsap from "gsap";
 import Image from "next/image";
+import { useTranslate } from "@/hooks/useTranslate";
 
 gsap.registerPlugin(ScrollTrigger);
 
 function ProcessHeading() {
+    const { t } = useTranslate();
 
     const containerRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -56,16 +58,14 @@ function ProcessHeading() {
             <div className="flex-[0.5] lg:flex-[2] flex-[1] relative z-10">
                 <Text>
                     <SmallText>
-                        (Our Process)
+                        {t("process.heading.subtitle")}
                     </SmallText>
                 </Text>
             </div>
             <div ref={headerRef} className="flex-[4] flex flex-col gap-10 relative z-10">
                 <Text delay={0.5}>
                     <MediumText className="xl:text-7xl font-bold">
-                        Great architecture isn&apos;t just about
-                        talent and experience, but
-                        collaborations and relationships.
+                        {t("process.heading.title")}
                     </MediumText>
                 </Text>
                 <Image

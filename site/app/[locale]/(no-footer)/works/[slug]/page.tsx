@@ -1,4 +1,4 @@
-import NotFound from "@/app/not-found";
+import NotFound from "@/app/[locale]/not-found";
 import PageClient from "./pageClient";
 
 import { slugify } from "@/lib/utils";

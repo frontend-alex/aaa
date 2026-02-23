@@ -13,15 +13,18 @@ import { ProjectProps } from "@/constants/data";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollImage } from "@/components/custom/scroll-image";
-import { Link } from "next-transition-router";
+import { Link } from "@/components/custom/link";
 
 import { groupImages, slugify } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { SlidingText } from "@/components/custom/text/sliding-text";
 
+import { useTranslate } from "@/hooks/useTranslate";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProject: ProjectProps }) => {
+    const { t } = useTranslate();
 
     const overlayRef = useRef<HTMLDivElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
@@ -94,25 +97,26 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                             <BigText className="text-5xl xl:text-[10vw]">
                                 {project?.title.includes(' ')
                                     ? (() => {
-                                        const [first, ...rest] = project.title.split(' ');
+                                        const translatedTitle = t(`project.title.${project.title}` as any) || project.title;
+                                        const [first, ...rest] = translatedTitle.split(' ');
                                         const remainder = rest.join(' ');
-                                        const startsWithNumber = /^\d/.test(rest[0]);
+                                        const startsWithNumber = rest[0] ? /^\d/.test(rest[0]) : false;
                                         return <>{first}{startsWithNumber ? ' ' : <br />}{remainder}</>;
                                     })()
-                                    : project?.title
+                                    : t(`project.title.${project?.title}` as any) || project?.title
                                 }
                             </BigText>
                         </Text>
 
                         <div className="flex justify-between items-center w-full">
                             <Text animateOnScroll={false} delay={0.2}>
-                                <BaseText className="lg:text-lg uppercase">{project?.location}</BaseText>
+                                <BaseText className="lg:text-lg uppercase">{t(`project.location.${project?.location}` as any) || project?.location}</BaseText>
                             </Text>
                             <Text animateOnScroll={false} delay={0.4}>
-                                <BaseText className="lg:text-lg uppercase">{project?.year}</BaseText>
+                                <BaseText className="lg:text-lg uppercase">{t(`project.title.${project?.year}` as any) || project?.year}</BaseText>
                             </Text>
                             <Text animateOnScroll={false} delay={0.6}>
-                                <BaseText className="hidden lg:flex lg:text-lg uppercase">(scroll to explore)</BaseText>
+                                <BaseText className="hidden lg:flex lg:text-lg uppercase">{t("project.scroll_explore")}</BaseText>
                             </Text>
                         </div>
                     </div>
@@ -121,22 +125,22 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                         <div className="w-full flex flex-col gap-10">
                             <div className="flex justify-start">
                                 <div className="flex flex-col gap-3 w-52">
-                                    <BaseText className="lg:text-xl text-stone-400">Date Completed</BaseText>
-                                    <BaseText className="lg:text-xl">{project?.year}</BaseText>
+                                    <BaseText className="lg:text-xl text-stone-400">{t("project.date_completed")}</BaseText>
+                                    <BaseText className="lg:text-xl">{t(`project.title.${project?.year}` as any) || project?.year}</BaseText>
                                 </div>
                                 <div className="flex flex-col gap-3 w-52">
-                                    <BaseText className="lg:text-xl text-stone-400">Project Type</BaseText>
-                                    <BaseText className="lg:text-lg uppercase">{project?.category}</BaseText>
+                                    <BaseText className="lg:text-xl text-stone-400">{t("project.project_type")}</BaseText>
+                                    <BaseText className="lg:text-lg uppercase">{t(`project.category.${project?.category}` as any) || project?.category}</BaseText>
                                 </div>
                             </div>
                             <div className="flex justify-start">
                                 <div className="flex flex-col gap-3 w-52">
-                                    <BaseText className="lg:text-xl text-stone-400">Total built area</BaseText>
+                                    <BaseText className="lg:text-xl text-stone-400">{t("project.total_area")}</BaseText>
                                     <BaseText className="lg:text-xl">12 000 m²</BaseText>
                                 </div>
                                 <div className="flex flex-col gap-3 w-52">
-                                    <BaseText className="lg:text-xl text-stone-400">Client</BaseText>
-                                    <BaseText className="lg:text-lg uppercase">Private</BaseText>
+                                    <BaseText className="lg:text-xl text-stone-400">{t("project.client")}</BaseText>
+                                    <BaseText className="lg:text-lg uppercase">{t("project.private")}</BaseText>
                                 </div>
                             </div>
                         </div>
@@ -189,24 +193,24 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                         <SlidingText
                             hoverText={
                                 <div className="hidden lg:flex items-center gap-2">
-                                    <SmallText>{nextProject.title}</SmallText>
+                                    <SmallText>{t(`project.title.${nextProject.title}` as any) || nextProject.title}</SmallText>
                                     <ArrowRight size={12} />
                                 </div>
                             }
                             className="cursor-pointer"
                         >
-                            <SmallText className="hidden lg:flex" link>Next Project</SmallText>
+                            <SmallText className="hidden lg:flex" link>{t("project.next")}</SmallText>
                         </SlidingText>
 
                         <div>
                             <Text>
                                 <BigText>
-                                    {nextProject.title}
+                                    {t(`project.title.${nextProject.title}` as any) || nextProject.title}
                                 </BigText>
                             </Text>
                             <div className="flex gap-8 mt-4">
-                                <SmallText>{nextProject.category}</SmallText>
-                                <SmallText>{nextProject.year}</SmallText>
+                                <SmallText>{t(`project.category.${nextProject.category}` as any) || nextProject.category}</SmallText>
+                                <SmallText>{t(`project.title.${nextProject.year}` as any) || nextProject.year}</SmallText>
                             </div>
                         </div>
                     </div>
