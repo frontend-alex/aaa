@@ -41,9 +41,9 @@ export function CookieConsent() {
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                     className="fixed h-screen flex items-end justify-center bottom-0 left-0 w-full z-[100] p-4 md:p-8"
                 >

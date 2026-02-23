@@ -14,7 +14,7 @@ import { MediumText, SmallText } from "@/components/components";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 
 
-import { contactSchema, type ContactSchemaType } from "@/lib/schema.contact";
+import { contactSchema, type ContactSchemaType } from "@/lib/schemas/schema.contact";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 

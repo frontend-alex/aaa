@@ -9,8 +9,8 @@ import type { Metadata } from "next";
 
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { TransitionFade } from "@/components/providers/transition/transition-fade";
-import { TranslationProvider } from "@/lib/context/TranslationContext";
 import { CookieConsent } from "@/components/CookieConsent";
+import { TranslationProvider } from "@/components/providers/TranslationProvider";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
