@@ -13,15 +13,15 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 export function TranslationProvider({ children, initialLanguage }: { children: React.ReactNode, initialLanguage?: Language }) {
     const [language, setLanguage] = useState<Language>(initialLanguage || "en");
 
-    useEffect(() => {
-        const storedLang = document.cookie
-            .split("; ")
-            .find((row) => row.startsWith("NEXT_LOCALE="))
-            ?.split("=")[1] as Language;
+    // useEffect(() => {
+    //     const storedLang = document.cookie
+    //         .split("; ")
+    //         .find((row) => row.startsWith("NEXT_LOCALE="))
+    //         ?.split("=")[1] as Language;
 
-        // If we want to override via cookie on client side without a refresh, but typically SSR params are the truth
-        // We do not overwrite initialLanguage unless user changes it interactively
-    }, []);
+    // If we want to override via cookie on client side without a refresh, but typically SSR params are the truth
+    // We do not overwrite initialLanguage unless user changes it interactively
+    // }, []);
 
     const handleSetLanguage = (lang: Language) => {
         setLanguage(lang);

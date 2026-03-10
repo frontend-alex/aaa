@@ -508,3 +508,4 @@ export type TranslationKey = keyof typeof dictionaries.en;
 
 export const locales: Language[] = ["en", "bg"];
 export const defaultLocale: Language = "en";
+export type localesprops = "en" | "bg"

@@ -42,7 +42,7 @@ function SortSelect({
                     <SelectSeparator />
                     {options.map((option) => (
                         <SelectItem key={option} value={option}>
-                            {t(`project.category.${option}` as any) || option}
+                            {t(`project.category.${option}` as string) || option}
                         </SelectItem>
                     ))}
                 </SelectGroup>

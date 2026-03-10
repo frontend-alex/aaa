@@ -11,6 +11,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { TransitionFade } from "@/components/providers/transition/transition-fade";
 import { CookieConsent } from "@/components/CookieConsent";
 import { TranslationProvider } from "@/components/providers/TranslationProvider";
+import { defaultLocale, localesprops } from "@/lib/i18n/dictionaries";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -35,7 +36,7 @@ export default async function RootLayout(props: {
 }) {
   const { children, params } = props;
   const resolvedParams = await params;
-  const locale = resolvedParams?.locale as any || "en";
+  const locale = resolvedParams?.locale as localesprops || defaultLocale;
 
   return (
     <html lang={locale} className={inter.variable}>

@@ -97,23 +97,23 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                             <BigText className="text-5xl xl:text-[10vw]">
                                 {project?.title.includes(' ')
                                     ? (() => {
-                                        const translatedTitle = t(`project.title.${project.title}` as any) || project.title;
+                                        const translatedTitle = t(`project.title.${project.title}` as string) || project.title;
                                         const [first, ...rest] = translatedTitle.split(' ');
                                         const remainder = rest.join(' ');
                                         const startsWithNumber = rest[0] ? /^\d/.test(rest[0]) : false;
                                         return <>{first}{startsWithNumber ? ' ' : <br />}{remainder}</>;
                                     })()
-                                    : t(`project.title.${project?.title}` as any) || project?.title
+                                    : t(`project.title.${project?.title}` as string) || project?.title
                                 }
                             </BigText>
                         </Text>
 
                         <div className="flex justify-between items-center w-full">
                             <Text animateOnScroll={false} delay={0.2}>
-                                <BaseText className="lg:text-lg uppercase">{t(`project.location.${project?.location}` as any) || project?.location}</BaseText>
+                                <BaseText className="lg:text-lg uppercase">{t(`project.location.${project?.location}` as string) || project?.location}</BaseText>
                             </Text>
                             <Text animateOnScroll={false} delay={0.4}>
-                                <BaseText className="lg:text-lg uppercase">{t(`project.title.${project?.year}` as any) || project?.year}</BaseText>
+                                <BaseText className="lg:text-lg uppercase">{t(`project.title.${project?.year}` as string) || project?.year}</BaseText>
                             </Text>
                             <Text animateOnScroll={false} delay={0.6}>
                                 <BaseText className="hidden lg:flex lg:text-lg uppercase">{t("project.scroll_explore")}</BaseText>
@@ -126,11 +126,11 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                             <div className="flex justify-start">
                                 <div className="flex flex-col gap-3 w-52">
                                     <BaseText className="lg:text-xl text-stone-400">{t("project.date_completed")}</BaseText>
-                                    <BaseText className="lg:text-xl">{t(`project.title.${project?.year}` as any) || project?.year}</BaseText>
+                                    <BaseText className="lg:text-xl">{t(`project.title.${project?.year}` as string) || project?.year}</BaseText>
                                 </div>
                                 <div className="flex flex-col gap-3 w-52">
                                     <BaseText className="lg:text-xl text-stone-400">{t("project.project_type")}</BaseText>
-                                    <BaseText className="lg:text-lg uppercase">{t(`project.category.${project?.category}` as any) || project?.category}</BaseText>
+                                    <BaseText className="lg:text-lg uppercase">{t(`project.category.${project?.category}` as string) || project?.category}</BaseText>
                                 </div>
                             </div>
                             <div className="flex justify-start">
@@ -193,7 +193,7 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                         <SlidingText
                             hoverText={
                                 <div className="hidden lg:flex items-center gap-2">
-                                    <SmallText>{t(`project.title.${nextProject.title}` as any) || nextProject.title}</SmallText>
+                                    <SmallText>{t(`project.title.${nextProject.title}` as string) || nextProject.title}</SmallText>
                                     <ArrowRight size={12} />
                                 </div>
                             }
@@ -205,12 +205,12 @@ const PageClient = ({ project, nextProject }: { project: ProjectProps; nextProje
                         <div>
                             <Text>
                                 <BigText>
-                                    {t(`project.title.${nextProject.title}` as any) || nextProject.title}
+                                    {t(`project.title.${nextProject.title}` as string) || nextProject.title}
                                 </BigText>
                             </Text>
                             <div className="flex gap-8 mt-4">
-                                <SmallText>{t(`project.category.${nextProject.category}` as any) || nextProject.category}</SmallText>
-                                <SmallText>{t(`project.title.${nextProject.year}` as any) || nextProject.year}</SmallText>
+                                <SmallText>{t(`project.category.${nextProject.category}` as string) || nextProject.category}</SmallText>
+                                <SmallText>{t(`project.title.${nextProject.year}` as string) || nextProject.year}</SmallText>
                             </div>
                         </div>
                     </div>

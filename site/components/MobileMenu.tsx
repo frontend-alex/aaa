@@ -99,7 +99,7 @@ function MobileMenu({
                                         }}
                                         onClick={() => setIsMenuOpen(false)}
                                     >
-                                        {t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as any) || link.name}
+                                        {t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as string) || link.name}
                                     </Link>
                                 </SlidingText>
                             ))}

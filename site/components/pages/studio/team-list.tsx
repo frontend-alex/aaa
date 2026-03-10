@@ -118,8 +118,8 @@ function TeamList() {
                         onMouseEnter={() => handleMouseEnter(index)}
                     >
                         <div className="flex justify-center items-center gap-5 w-full">
-                            <SmallText className="uppercase">{t(`team.position.${member.position}` as any)}</SmallText>
-                            <MediumText className="uppercase font-bold xl:text-6xl">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
+                            <SmallText className="uppercase">{t(`team.position.${member.position}` as string)}</SmallText>
+                            <MediumText className="uppercase font-bold xl:text-6xl">{t(`team.name.${member.name}` as string) || member.name}</MediumText>
                         </div>
                     </Link>
                 ))}
@@ -134,8 +134,8 @@ function TeamList() {
                             height={400}
                             className="w-full h-full object-cover shadow-2xl"
                         />
-                        <MediumText className="uppercase">{t(`team.name.${member.name}` as any) || member.name}</MediumText>
-                        <SmallText className="uppercase -mt-2">{t(`team.position.${member.position}` as any)}</SmallText>
+                        <MediumText className="uppercase">{t(`team.name.${member.name}` as string) || member.name}</MediumText>
+                        <SmallText className="uppercase -mt-2">{t(`team.position.${member.position}` as string)}</SmallText>
                     </Link>
                 ))}
             </div>

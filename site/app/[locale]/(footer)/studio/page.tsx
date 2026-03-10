@@ -1,15 +1,12 @@
 "use client";
 
-import { BigText, MediumText, Section, SlidingButton, SmallText } from "@/components/components";
-import { Link } from "@/components/custom/link";
+import { BigText, MediumText, Section, SmallText } from "@/components/components";
 import { ScrollImage } from "@/components/custom/scroll-image";
-import { SlidingText } from "@/components/custom/text/sliding-text";
 import { Text } from "@/components/custom/text/text";
 import { StudioLanding } from "@/components/pages/studio/studio-landing";
 import { TeamList } from "@/components/pages/studio/team-list";
 import { AwardsList } from "@/components/pages/studio/awards-list";
 import { useTranslate } from "@/hooks/useTranslate";
-import Image from "next/image";
 
 export default function StudioPage() {
     const { t } = useTranslate();

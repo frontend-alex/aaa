@@ -43,11 +43,9 @@ function StickyCards() {
                         end: "top top",
                         onUpdate: (self: ScrollTrigger) => {
                             const progress: number = self.progress;
-                            const scale: number = 1 - progress * 0.05;
                             const afterOpacity: number = progress;
 
                             gsap.set(card, {
-                                // scale: scale,
                                 "--after-opacity": afterOpacity,
                             });
                         },
@@ -80,19 +78,19 @@ function StickyCards() {
                                 {t(`process.steps.${step.id}.title`)}
                             </MediumText>
 
+                            <div className="max-w-[400px]">
+                                <Image
+                                    src="/images/gallery/image3.png"
+                                    className="w-full object-contain"
+                                    alt="section-2-1-image"
+                                    width={1920}
+                                    height={1080}
+                                />
+                            </div>
 
-                            <Image
-                                src="/images/gallery/image3.png"
-                                className="h-[400px] max-w-[700px] object-cover"
-                                alt="section-2-1-image"
-                                width={1920}
-                                height={1080}
-                            />
-                            <Text>
-                                <p className="max-w-lg text-xl font-medium">
-                                    {t(`process.steps.${step.id}.desc`)}
-                                </p>
-                            </Text>
+                            <p className="max-w-2xl text-xl font-medium">
+                                {t(`process.steps.${step.id}.desc`)}
+                            </p>
                         </div>
                     </div>
                 </div>

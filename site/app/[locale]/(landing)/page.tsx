@@ -8,7 +8,6 @@ import { ScrollImage } from "@/custom/scroll-image";
 import { Button } from "@/components/custom/button";
 import { useCallback, useEffect, useRef } from "react";
 
-import { LandingHeader } from "@/components/pages/landing/landing-header";
 import { usePreloader } from "@/components/providers/preloader-context";
 
 
@@ -183,7 +182,7 @@ export default function Page() {
             {PROGRESS_STEPS.map((step, idnex) => (
               <div key={idnex} className="flex items-center gap-2 border-b-2 border-neutral-200 pb-1">
                 <BaseText className="text-stone-400">(0{idnex + 1})</BaseText>
-                <BaseText>{t(`process.steps.${step.id}.name` as any)}</BaseText>
+                <BaseText>{t(`process.steps.${step.id}.name` as string)}</BaseText>
               </div>
             ))}
           </div>

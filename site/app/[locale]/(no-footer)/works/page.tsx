@@ -51,7 +51,7 @@ export default function WorksPage() {
                         className="flex flex-col gap-1 w-full cursor-pointer"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain h-[400px]" width={1000} height={1000} />
-                        <SmallText>{t(`project.title.${project.title}` as any) || project.title}</SmallText>
+                        <SmallText>{t(`project.title.${project.title}` as string) || project.title}</SmallText>
                     </Link>
                 )}
             />
@@ -64,7 +64,7 @@ export default function WorksPage() {
                         className="flex flex-col gap-3 w-full h-full"
                     >
                         <ScrollImage src={project.src} alt={project.title} className="object-contain w-full" width={1000} height={1000} />
-                        <SmallText>{t(`project.title.${project.title}` as any) || project.title}</SmallText>
+                        <SmallText>{t(`project.title.${project.title}` as string) || project.title}</SmallText>
                     </Link>
                 ))}
             </Section>

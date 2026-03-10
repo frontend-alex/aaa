@@ -59,7 +59,6 @@ function Navbar({
     logoVariant?: "default" | "light";
 }) {
     const stickyButtonsRef = useRef<HTMLDivElement>(null);
-    const lastLink = NAV_LINKS[NAV_LINKS.length - 1];
     const { t } = useTranslate();
 
     // Sticky animation
@@ -103,7 +102,7 @@ function Navbar({
                                 className="uppercase text-sm font-bold flex items-center"
                                 href={link.href}
                             >
-                                <SlidingText>{t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as any) || link.name}</SlidingText>
+                                <SlidingText>{t(`nav.${link.name.toLowerCase().replace(/ /g, '_')}` as string) || link.name}</SlidingText>
                                 {/* {link.name !== lastLink.name ? "," : ""} */}
                             </Link>
                         );

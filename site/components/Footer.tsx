@@ -48,7 +48,7 @@ function Footer() {
         updateTime()
         const interval = setInterval(updateTime, 1000 * 60)
         return () => clearInterval(interval)
-    }, [])
+    }, [t])
 
     return (
         <Section className="z-20 p-0 gap-0 bg-white dark:bg-black">
